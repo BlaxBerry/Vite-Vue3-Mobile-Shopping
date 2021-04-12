@@ -1,15 +1,10 @@
 <template>
   <div class="home">
 
-    this is HomePage
-    <hr>
-    <van-button type="primary">主要按钮</van-button>
-    <van-button type="info">信息按钮</van-button>
-    <van-button type="default">默认按钮</van-button>
-    <van-button type="warning">警告按钮</van-button>
-    <van-button type="danger">危险按钮</van-button>
-    <hr>
-    <van-stepper v-model="num" />
+    <van-search v-model="SearchValue" input-align="center" placeholder="请输入搜索关键词" disabled shape="round"
+  background="#efefefe"/>
+
+    <p>hello</p>
 </div>
 </template>
 
@@ -22,7 +17,8 @@ export default {
   name: 'Home',
   data(){
     return {
-      num: 0
+      SearchValue:''
+
     }
   },
   components: {

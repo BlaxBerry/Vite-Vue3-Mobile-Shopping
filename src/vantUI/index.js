@@ -1,8 +1,5 @@
 import Vue from 'vue';
 // 引入 vantUI 模版和样式
-import { Button, Stepper } from 'vant';
-// import 'vant/lib/button/style';
-// import 'vant/lib/stepper/style';
-
-Vue.use(Button);
-Vue.use(Stepper);
+import { Search } from 'vant';
+// import 'vant/lib/search/style';
+Vue.use(Search);
