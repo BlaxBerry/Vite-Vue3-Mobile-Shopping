@@ -1,10 +1,18 @@
 <template>
   <div class="home">
 
+    <!-- search 搜索框 -->
     <van-search v-model="SearchValue" input-align="center" placeholder="请输入搜索关键词" disabled shape="round"
   background="#efefefe"/>
 
-    <p>hello</p>
+    <!-- swipe 轮播图 -->
+    <van-swipe class="my-swipe" :autoplay="3000" indicator-color="#skyleblue">
+      <van-swipe-item :key="item.id" v-for="item in banner">
+        <img :src="item.image_url" width="100%" :alt="item.content">
+      </van-swipe-item>
+    </van-swipe>
+
+
 </div>
 </template>
 
@@ -22,7 +30,8 @@ export default {
   name: 'Home',
   data(){
     return {
-      SearchValue:''
+      SearchValue:'',
+      banner:[]        // 轮播图image_url
     }
   },
   created(){
@@ -30,13 +39,14 @@ export default {
     // 拦截器
     // request.get("/index/index")
     GetHomePageList()
-    .then(function(result){
+    .then((result)=>{
 
-      console.log('success');
-      console.log(result.data.data);
+      // console.log(result.data.data);
+      this.banner = result.data.data.banner;
+
 
     })
-    .catch(function(err){
+    .catch((err)=>{
 
       console.log('error');
       console.log(err);
