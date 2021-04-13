@@ -14,7 +14,9 @@
 // 导入axios
 // import axios from "axios";
 // 导入拦截器
-import request from "@/request/request.js";
+// import request from "@/request/request.js";
+// 导入 api中的接口请求（接口请求管理的JS文件）
+import {GetHomePageList} from '@/request/api.js'
 
 export default {
   name: 'Home',
@@ -26,7 +28,8 @@ export default {
   created(){
     // 接口 "http://kumanxuan1.f3322.net:8001/index/index"
     // 拦截器
-    request.get("/index/index")
+    // request.get("/index/index")
+    GetHomePageList()
     .then(function(result){
 
       console.log('success');
