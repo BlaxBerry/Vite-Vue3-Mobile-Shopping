@@ -9,3 +9,13 @@ export const GetHomePageList = () => {
 export const GetSearchPopupData = () => {
     return request.get('/search/index')
 };
+
+// propup弹出层的 搜索列表数据
+export const GetSearchTipListData = (params) => {
+    return request.get('/search/helper', {
+        params
+        // params: {
+        //     keyword: ''
+        // }
+    })
+};
