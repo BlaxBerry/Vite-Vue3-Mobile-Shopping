@@ -11,7 +11,16 @@ const routes = [{
     }, {
         path: '/home',
         name: 'Home',
-        component: Home
+        component: Home,
+        children: [
+            //搜素弹出层，home子路由
+            {
+                path: '/home/searchPopup',
+                name: 'SearchPopup',
+                component: () =>
+                    import ( /* webpackChunkName: "SearchPopup" */ '../views/SearchPopup.vue')
+            }
+        ]
     }
     // {
     //   path: '/about',

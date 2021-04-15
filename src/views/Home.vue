@@ -2,8 +2,15 @@
   <div class="home">
 
     <!-- search 搜索框 -->
-    <van-search v-model="SearchValue" input-align="center" placeholder="请输入搜索关键词" disabled shape="round"
-  background="#efefefe"/>
+    <van-search 
+      v-model="SearchValue"  
+      input-align="center" 
+      placeholder="请输入搜索关键词" 
+      disabled 
+      shape="round"
+      background="#efefefe" 
+      @click="$router.push('/home/searchPopup').catch(err=>{})"
+    />
 
     <!-- swipe 轮播图 -->
     <van-swipe class="my-swipe" :autoplay="3000" indicator-color="#skyleblue">
@@ -12,6 +19,15 @@
       </van-swipe-item>
     </van-swipe>
 
+    <!-- popup 搜索弹出层-->
+    <transition name="slide">
+      <router-view></router-view>
+    </transition>
+
+    <!-- VantUI动画过渡
+      <transition name="van-slide-left">
+       <router-view></router-view>
+    </transition> -->
 
 </div>
 </template>
@@ -58,3 +74,19 @@ export default {
   }
 }
 </script>
+
+
+<style lang="less" scoped>
+.slide-enter, .slide-leave-to{
+  // Popup 弹出层动画过渡开始前
+  left: -100%;
+}
+.slide-enter-active, .slide-leave-active{
+  // Popup 弹出层动画过渡
+  transition: all 0.5s;
+}
+.slide-enter-to, .slide-leave{
+  // Popup 弹出层动画过渡结束后
+  left: 0;
+}
+</style>
