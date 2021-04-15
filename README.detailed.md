@@ -363,7 +363,7 @@ export default {
 import axios from 'axios';
 
 const instance = axios.create({
-    baseURL: "http://kumanxuan1.f3322.net:8001/index/index",
+    baseURL: "http://kumanxuan1.f3322.net:8001",
     timeout: 5000
 });
 
@@ -854,11 +854,406 @@ export default {
 
 
 
+### 10.2、其余3个组件界面的内容
+
+通过`v-if语句`和`data`中的数据变量的值，来控制哪一个组件在页面中的显示
+
+因为组件是在搜索框弹出层中，所以是其子组件，模版写在`SearchPopup.vue`中
+
+```vue
+<template>
+    <div class="search-popup">
+        <!-- 搜索框 -->
+        <van-search
+            v-model="searchValue"
+            show-action
+            :placeholder="placeholderValue"
+            @search="onSearch"
+            @cancel="onCancel"
+        />
+      
+      <!--历史记录+热门搜索/搜索关键字提示列表/搜索结果商品列表 3个组件
+        <comp1 v-if="blockshow==1"></comp1>
+        <comp2 v-else-if="blockshow==2"></comp2>
+        <comp3 v-else-if="blockshow==3"></comp3>-->
+
+    </div>
+</template>
+<script>
+  export default {
+    data(){
+      return {
+        blockshow: 1
+        // blockShow==1: 历史记录+热门搜索
+        // blockShow==2: 搜索关键字提示列表
+        // blockShow==3: 搜索结果商品列表
+      }
+    }
+  }
+</script>
+```
+
+
+
+### 10.3、热门搜索 历史记录 
+
+组件定义在项目目录下的 `components / HotHistory.vue`文件中设置组件
+
+```vue
+<template>
+    <div>
+        热门历史
+    </div>
+</template>
+
+<script>
+export default {
+
+}
+</script>
+
+<style lang="less" scoped>
+</style>
+```
+
+在父组件`SearchPopup.vue`中引入并使用
+
+通过`import HotHistory from "@/components/HotHistory"`引入组件，
+
+在`components属性`中定义导入的该组件作为子组件，
+
+在模版中调用使用定义的子组件标签
+
+```vue
+<template>
+    <div class="search-popup">
+        <!-- 搜索框 -->
+        <van-search
+            v-model="searchValue"
+            show-action
+            :placeholder="placeholderValue"
+            @search="onSearch"
+            @cancel="onCancel"
+        />
+      
+       <!-- 历史记录+热门搜索/搜索关键字提示列表/搜索结果商品列表 3个组件-->
+       <!-- <comp1 v-if="blockshow==1"></comp1> -->
+       <HotHistory></HotHistory>
+      
+       <!-- <comp2 v-else-if="blockshow==2"></comp2> -->
+       <!-- <comp3 v-else-if="blockshow==3"></comp3>  -->
+
+    </div>
+</template>
+<script>
+  import HotHistory from "@/components/HotHistory"
+  export default {
+    data(){
+      return {
+        blockshow: 1
+        // blockShow==1: 历史记录+热门搜索
+        // blockShow==2: 搜索关键字提示列表
+        // blockShow==3: 搜索结果商品列表
+      }
+    },
+    components:{
+      HotHistory
+    }
+  }
+</script>
+```
+
+
+
+#### 组件结构
+
+通过VantUI组件完成结构模版
+
+```vue
+<template>
+    <div>
+        <!-- 搜索历史 -->
+        <div class="hot-history">
+            <!-- top tittle-->
+            <div class="top">
+                <h3>浏览历史记录</h3>
+                <!-- 删除icon -->
+                <van-icon name="delete" />
+            </div>
+            <!-- bottom tags-->
+            <div class="bottom">
+                <van-tag plain type="default">标签</van-tag>
+                <van-tag plain type="default">标签</van-tag>
+                <van-tag plain type="default">标签</van-tag>
+            </div>
+        </div>
+
+        <!-- 热门搜索 -->
+       <div class="hot-history">
+            <!-- top tittle-->
+            <div class="top">
+                <h3>热门搜索</h3>
+            </div>
+            <!-- bottom tags-->
+            <div class="bottom">
+                <van-tag plain type="default">标签</van-tag>
+                <van-tag plain type="default">标签</van-tag>
+                <van-tag plain type="default">标签</van-tag>
+            </div>
+        </div>
+    </div>
+</template>
+```
+
+
+
+#### 组件less样式调整
+
+```less
+<style lang="less" scoped>
+.hot-history {
+    background-color: #fff;
+    padding: .20rem;// html font-size=100px
+    margin-bottom: .20rem;
+    font-size: .20rem;
+
+    .top {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+        h3 {
+            font-size: .20rem;
+            font-weight: 700;
+        }
+
+    }
+    .bottom {
+        display: flex;
+        margin-top: 0.20rem;
+
+        .van-tag {
+            margin-right:0.10rem;
+            padding: 0.05rem;
+        }
+    }
+}
+</style>
+```
+
+
+
+#### 数据请求
+
+因为无论是top搜索框，还是后面的三个组件内容都是在弹出层上
+
+所以，数据的请求应该在整个弹出层组件上
+
+即，`SearchPopup.vue`上
+
+搜索窗口数据接口
+
+```js
+//接口地址
+http://kumanxuan1.f3322.net:8001/search/index
+```
+
+在接口管理文件`api.js`中设置接口
+
+```js
+import request from './request';
+
+// homepage的页面的请求数据
+export const GetHomePageList = () => {
+    return request.get('/index/index')
+};
+
+// 搜索弹出框 Popup的数据
+export const GetSearchPopupData = () => {
+    return request.get('/search/index')
+};
+```
+
+然后`SearchPopup.vue` 引入导出的函数，
+
+函数的返回值是对数据的请求
+
+```vue
+<script>
+// 导入 历史记录和热门搜索 组件
+import HotHistory from '@/components/HotHistory.vue'
+// 导入搜索窗口数据接口请求api
+import {GetSearchPopupData} from "@/request/api"
+
+export default {
+    data() {
+        return {
+            blockShow: 1,
+        };
+    },
+    created(){
+        // 请求获得 placeholderValue的数据
+        // 历史记录和热门搜索
+        GetSearchPopupData().then(result=>{
+            // console.log(result.data.data.defaultKeyword);
+        })
+    },
+    components:{
+        HotHistory
+    }
+}
+</script>
+```
+
+
+
+#### 组件数据父传子
+
+父组件的created生命周期函数中请求数据
+
+并将响应回的数据赋值给data中的数据
+
+然后通过自定义属性，传递给子组件
+
+即在`SearchPopup` 组件中获取并传递给子组件`HotHistory`
+
+```vue
+<template>
+    <div class="search-popup">
+        <!-- 搜索弹出框 -->
+        <van-search
+            v-model="searchValue"
+            show-action
+            :placeholder="placeholderValue"
+            @search="onSearch"
+            @cancel="onCancel"
+        />
+
+        <!-- 历史记录+热门搜索组件-->
+        <HotHistory v-if="blockShow==1" :historyKeywordList="historyKeywordList" :hotKeywordList="hotKeywordList"></HotHistory>
+      
+    </div>
+</template>
+
+<script>
+// 导入 历史记录和热门搜索 组件
+import HotHistory from '@/components/HotHistory.vue'
+// 导入搜索窗口数据接口请求api
+import {GetSearchPopupData} from "@/request/api"
+
+export default {
+    data() {
+        return {
+            // top搜索框内容value
+            searchValue: '',
+            // top搜索框placeholder内容
+            placeholderValue:'',
+            // 历史记录+热门搜索/搜索关键字提示列表/搜索结果商品列表 3个组件显示与否
+            // blockShow==1: 历史记录+热门搜索
+            // blockShow==2: 搜索关键字提示列表
+            // blockShow==3: 搜索结果商品列表
+            blockShow: 1,
+            historyKeywordList:[],
+            hotKeywordList:[]
+        };
+    },
+    created(){
+        GetSearchPopupData().then(result=>{
+            // console.log(result.data.data);
+          
+            // 请求获得 placeholderValue的数据
+            this.placeholderValue=result.data.data.defaultKeyword.keyword;
+            
+            // 历史记录和热门搜索
+            // 父传子
+            this.historyKeywordList = result.data.data.historyKeywordList;
+            this.hotKeywordList = result.data.data.hotKeywordList;
+        })
+     
+    },
+    components:{
+        HotHistory
+    }
+}
+</script>
+```
+
+
+
+#### 子组件接收数据与渲染页面
+
+在子组件`HotHistory`中通过`props`属性接收从`SearchPopup` 组件传出的数据
+
+并用来`v-for`遍历生成页面DOM结构
+
+其中，通过数据来判断是否添加class类样式
+
+```vue
+<template>
+    <div>
+        <!-- 搜索历史记录 -->
+        <div class="hot-history">
+            <!-- top tittle-->
+            <div class="top">
+                <h3>浏览历史记录</h3>
+                <!-- 删除icon -->
+                <van-icon name="delete" />
+            </div>
+            <!-- bottom tags-->
+            <div class="bottom">
+                <van-tag 
+                         plain type="default" 
+                         v-for="(item,index) in historyKeywordList" 
+                         :key="index">
+                  {{item}}
+                </van-tag>   
+            </div>
+        </div>
+
+        <!-- 热门搜索 -->
+       <div class="hot-history">
+            <!-- top tittle-->
+            <div class="top">
+                <h3>热门搜索</h3>
+            </div>
+            <!-- bottom tags-->
+            <div class="bottom">
+               <van-tag plain type="default" 
+                        v-for="(item,index) in hotKeywordList" 
+                        :key="index"
+                        :class="item.is_hot==1?'hotTagRed':''">
+                 {{item.keyword}}
+               </van-tag>              
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+export default {
+    data(){
+        return {
+        }
+    },
+    props: ['historyKeywordList',"hotKeywordList"]
+}
+</script>
+
+<style>
+  .hotTagRed {
+    color: red;
+}
+</style>
+```
 
 
 
 
-## 重复点击同一个路由会报错的bug
+
+
+
+## 重复点击同一个路由报错的bug
 
 1. ### **Vue-router版本降级处理**（不推荐）
 
@@ -881,3 +1276,27 @@ export default {
    };
    ```
 
+
+
+
+
+##  ”@/“路径提示配置
+
+`jsconfig.json`
+
+```js
+{
+    "compilerOptions": {
+        "target": "ES6",
+        "module": "commonjs",
+        "allowSyntheticDefaultImports": true,
+        "baseUrl": "./",
+        "paths": {
+            "@/*":["src/*"]
+        }
+    },
+    "exclude": [
+        "node_modules"
+    ]
+}
+```
