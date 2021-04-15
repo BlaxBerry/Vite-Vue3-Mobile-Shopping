@@ -7,6 +7,11 @@ import "@/vantUI";
 // 引入 reset-css 清除css样式
 import 'reset-css'
 
+// 全局过滤器 商品价格
+Vue.filter('RMBformat', val => {
+    return "¥ " + val + " RMB";
+})
+
 Vue.config.productionTip = false
 
 new Vue({

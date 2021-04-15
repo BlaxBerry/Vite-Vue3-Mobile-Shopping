@@ -852,8 +852,6 @@ export default {
 
 
 
-
-
 ### 10.2、其余3个组件界面的内容
 
 通过`v-if语句`和`data`中的数据变量的值，来控制哪一个组件在页面中的显示
@@ -895,7 +893,9 @@ export default {
 
 
 
-### 10.3、热门搜索 历史记录 
+
+
+## 十一、热门搜索 历史记录 
 
 组件定义在项目目录下的 `components / HotHistory.vue`文件中设置组件
 
@@ -965,7 +965,7 @@ export default {
 
 
 
-#### 组件结构
+### 组件结构
 
 通过VantUI组件完成结构模版
 
@@ -1007,7 +1007,7 @@ export default {
 
 
 
-#### 组件less样式调整
+### 组件less样式调整
 
 ```less
 <style lang="less" scoped>
@@ -1044,7 +1044,7 @@ export default {
 
 
 
-#### 数据请求
+### 数据请求
 
 因为无论是top搜索框，还是后面的三个组件内容都是在弹出层上
 
@@ -1108,7 +1108,7 @@ export default {
 
 
 
-#### 组件数据父传子
+### 组件数据父传子
 
 父组件的created生命周期函数中请求数据
 
@@ -1181,7 +1181,7 @@ export default {
 
 
 
-#### 子组件接收数据与渲染页面
+### 子组件接收数据与渲染页面
 
 在子组件`HotHistory`中通过`props`属性接收从`SearchPopup` 组件传出的数据
 
@@ -1246,6 +1246,245 @@ export default {
 }
 </style>
 ```
+
+
+
+
+
+
+
+## 十二、搜索提示列表
+
+### 设置结构
+
+引入VantUI的List组件和Cell组件
+
+```js
+import Vue from 'vue';
+// 引入 vantUI 模版和样式
+import { Search, Swipe, SwipeItem, Icon, Tag, List，Cell } from 'vant';
+
+// import 'vant/lib/search/style';
+
+Vue
+    .use(Search)
+    .use(Swipe)
+    .use(SwipeItem)
+    .use(Icon)
+    .use(Tag)
+    .use(List)
+    .use(Cell)
+```
+
+并在`SearchList.vue`模版中调用
+
+```vue
+<template>
+    <!--搜索列表-->
+    <van-list
+        v-model="loading"
+        :finished="finished"
+        finished-text="没有更多了"
+        >
+        <van-cell v-for="item in list" :key="item" :title="item" />
+    </van-list>
+
+</template>
+
+<script>
+export default {
+    data() {
+        return {
+            list: [1,2,3],
+            loading: false,
+            finished: false,
+        };
+    }
+};
+</script>
+```
+
+父组件中
+
+```vue
+
+```
+
+
+
+### 数据请求
+
+```js
+//接口地址
+http://kumanxuan1.f3322.net:8001/search/helper
+```
+
+搜索提示列表的本质是GET请求传参数，
+
+每次文本框内容改变（有内容输入）就吧输入内容作为参数发送GET请求
+
+事件使用`VantUI的input事件`监听文本框的内容变化
+
+```vue
+<template>
+    <div class="search-popup">
+        <!-- 搜索弹出框 -->
+        <van-search
+            v-model="searchValue"
+            show-action
+            :placeholder="placeholderValue"
+            @search="onSearch"
+            @cancel="onCancel"
+            @input="onInput" 
+        />
+
+        <!-- 历史记录+热门搜索 -->
+        <HotHistory 
+            v-if="blockShow==1" 
+            :historyKeywordList="historyKeywordList" 
+            :hotKeywordList="hotKeywordList">
+        </HotHistory>
+
+        <!-- 搜索关键字提示列表 -->
+        <SearchList
+            v-if="blockShow==2" 
+        ></SearchList>
+
+        <!-- 搜索结果商品列表 -->
+      
+    </div>
+</template>
+```
+
+
+
+### 表单Input事件
+
+在接口管理的`request / api.js`中,
+
+axios的POST请求参数的传递通过params
+
+```js
+import request from './request';
+
+// homepage的页面的请求数据
+export const GetHomePageList = () => {
+    return request.get('/index/index')
+};
+
+// 搜索弹出框 Popup的数据
+export const GetSearchPopupData = () => {
+    return request.get('/search/index')
+};
+
+// propup弹出层的 搜索列表数据
+export const GetSearchTopListData = (xxx) => {
+    return request.get('/search/helper', {
+        params: xxx;
+        // params: {
+        //     keyword: ''
+        // }
+    })
+};
+```
+
+可以考虑把params的属性值那个对象最为函数调用时的参数
+
+```vue
+<script>
+// 导入 历史记录和热门搜索 组件
+import HotHistory from '@/components/HotHistory.vue'
+
+// 导入搜索窗口数据接口请求api
+import {GetSearchPopupData,GetSearchTopListData} from "@/request/api"
+
+// 导入 搜索列表 组件
+import SearchList from '@/components/SearchList.vue'
+
+export default {
+   data() {
+     return {
+       list: []
+     }
+   },
+   methods: {
+        onSearch(val) {
+            // enter 输入的值
+            console.log('onsearch',val);
+            this.blockShow = 2;
+        },
+        onCancel() {
+            // 点击取消，通过URL路径离场动画,返回上一层路径
+            // this.$router.push('/home');
+            this.$router.go(-1);
+        },
+        onInput(val){
+            // 输入框内容变化时
+            // 发送请求，获取实时输入的文本
+            GetSearchTopListData({keyword: val}).then(result=>{
+              this.list = result.data.data;
+            })
+        }
+   }
+```
+
+
+
+### 组件数据的父传子 和 页面渲染
+
+```vue
+ <!-- 搜索关键字提示列表 -->
+<SearchList v-if="blockShow==2" :searchTipList="searchTipList"></SearchList>
+```
+
+```vue
+<template>
+    <!--搜索列表-->
+    <van-list
+        v-model="loading"
+        :finished="finished"
+        finished-text="没有更多了"
+        >
+        <van-cell 
+            v-for="(item,index) in searchTipList" 
+            :key="index" 
+            :title="item" />
+    </van-list>
+</template>
+
+<script>
+export default {
+    data() {
+        return {
+            loading: false,
+            finished: true,
+        };
+    },
+    props:['searchTipList']
+};
+</script>
+```
+
+
+
+
+
+## 十三、搜索商品展示页面
+
+### 数据请求
+
+```js
+//接口地址
+http://kumanxuan1.f3322.net:8001/goods/list
+```
+
+
+
+
+
+## 十四、单个商品组件
+
+### 组件数据爷爷传父再传子
 
 
 

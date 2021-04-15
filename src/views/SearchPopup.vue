@@ -21,12 +21,17 @@
 
         <!-- 搜索关键字提示列表 -->
         <SearchList
-            v-if="blockShow==2" 
+            v-else-if="blockShow==2" 
             :searchTipList="searchTipList"
         ></SearchList>
 
         <!-- 搜索结果商品列表 -->
-      
+        <SearchProducts
+            v-else-if="blockShow==3"
+            :searchTipList="searchTipList"
+            :filterCategory="filterCategory"
+            :searchGoodsList="searchGoodsList"
+        ></SearchProducts>
     </div>
   
 </template>
@@ -37,10 +42,14 @@
 import HotHistory from '@/components/HotHistory.vue'
 
 // 导入搜索窗口数据接口请求api
-import {GetSearchPopupData,GetSearchTipListData} from "@/request/api"
+import {GetSearchPopupData, GetSearchTipListData, GetSearchGoodListData} from "@/request/api"
 
 // 导入 搜索列表 组件
 import SearchList from '@/components/SearchList.vue'
+
+// 导入 搜索结果商品列表 组件
+import SearchProducts from '@/components/SearchProducts.vue'
+
 
 export default {
     data() {
@@ -59,14 +68,23 @@ export default {
             //热门搜索
             hotKeywordList:[],
             // 搜索提示列表
-            searchTipList:[]
+            searchTipList:[],
+            // 搜索结果商品列表
+            searchGoodsList:[],
+            // 搜索结果商品分类
+            filterCategory:[],
+            
         };
     },
     methods: {
         onSearch(val) {
             // enter 输入的值
-            console.log('onsearch',val);
             this.blockShow = 3;
+            GetSearchGoodListData({keyword:val}).then(result=>{
+                console.log(result.data.data);
+                this.searchGoodsList = result.data.data.goodsList;
+                this.filterCategory=result.data.data.filterCategory;
+            })
         },
         onCancel() {
             // 点击取消，通过URL路径离场动画,返回上一层路径
@@ -78,7 +96,7 @@ export default {
             // 发送请求，获取实时输入的文本
             this.blockShow = 2;
             GetSearchTipListData({keyword:val}).then(result=>{
-                console.log(result.data);
+                // console.log(result.data);
                 this.searchTipList = result.data.data;
             })
         }
@@ -98,7 +116,8 @@ export default {
     },
     components:{
         HotHistory,
-        SearchList
+        SearchList,
+        SearchProducts
     }
 }
 </script>
