@@ -32,6 +32,7 @@
             :filterCategory="filterCategory"
             :searchGoodsList="searchGoodsList"
             @categoryChange="categoryChange"
+            @priceChange="priceChange"
         ></SearchProducts>
     </div>
   
@@ -89,6 +90,12 @@ export default {
         categoryChange(value){
             this.categoryId = value;
             this.onSearch(this.searchVal);
+        },
+        // 点击价格排列顺序搜索 来自子组件的自定义事件
+        priceChange(value){
+            this.order = value;
+            this.sort = "price"
+            this.onSearch(this.searchValue);
         },
         // enter 输入的值
         onSearch(val) {
