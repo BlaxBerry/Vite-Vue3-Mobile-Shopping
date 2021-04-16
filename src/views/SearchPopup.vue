@@ -24,6 +24,7 @@
         <SearchList
             v-else-if="blockShow==2" 
             :searchTipList="searchTipList"
+            @cellClick="cellClick"
         ></SearchList>
 
         <!-- 搜索结果商品列表 -->
@@ -100,7 +101,14 @@ export default {
         },
         // 点击tag标签 搜索商品
         tagClick(val){
+            //点击标签后也会改变搜索框的值
+            this.searchValue = val;
             this.onSearch(val);
+        },
+        // 点击搜索关键字提示下拉列表
+        cellClick(val){
+            this.searchValue = val;
+            this.onSearch(val)
         },
         // enter 输入的值
         onSearch(val) {

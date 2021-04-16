@@ -8,7 +8,8 @@
         <van-cell 
             v-for="(item,index) in searchTipList" 
             :key="index" 
-            :title="item" />
+            :title="item" 
+            @click="cellClick(item)"/>
     </van-list>
 
 </template>
@@ -21,7 +22,13 @@ export default {
             finished: true,
         };
     },
-    props:['searchTipList']
+    props:['searchTipList'],
+    methods:{
+        cellClick(val){
+            // console.log(val);
+            this.$emit("cellClick",val);
+        }
+    }
 };
 </script>
 
