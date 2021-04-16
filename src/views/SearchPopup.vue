@@ -16,7 +16,8 @@
         <HotHistory 
             v-if="blockShow==1" 
             :historyKeywordList="historyKeywordList" 
-            :hotKeywordList="hotKeywordList">
+            :hotKeywordList="hotKeywordList"
+            @tagClick="tagClick">
         </HotHistory>
 
         <!-- 搜索关键字提示列表 -->
@@ -96,6 +97,10 @@ export default {
             this.order = value;
             this.sort = "price"
             this.onSearch(this.searchValue);
+        },
+        // 点击tag标签 搜索商品
+        tagClick(val){
+            this.onSearch(val);
         },
         // enter 输入的值
         onSearch(val) {

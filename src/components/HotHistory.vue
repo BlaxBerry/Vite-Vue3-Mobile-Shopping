@@ -13,7 +13,8 @@
                 <van-tag 
                     plain type="default" 
                     v-for="(item,index) in historyKeywordList" 
-                    :key="index">
+                    :key="index"
+                    @click = "tagClick(item)">
                     {{item}}
                 </van-tag>
             </div>
@@ -47,7 +48,14 @@ export default {
 
         }
     },
-    props: ['historyKeywordList',"hotKeywordList"]
+    props: ['historyKeywordList',"hotKeywordList"],
+    methods:{
+        // 点击tag标签 搜索商品
+        tagClick(value){
+            // console.log(value);
+            this.$emit("tagClick",value)
+        }
+    }
 }
 </script>
 
