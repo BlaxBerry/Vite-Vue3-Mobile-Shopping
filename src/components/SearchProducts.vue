@@ -3,9 +3,9 @@
         <!-- 搜索结果商品展示 -->
 
         <van-dropdown-menu>
-            <van-dropdown-item title="综合" v-model="value1" :options="option1" disabled/>
-            <van-dropdown-item title="价格" v-model="value2" :options="option2" />
-            <van-dropdown-item title="分类" v-model="value2" :options="option2" />
+            <van-dropdown-item title="综合" disabled/>
+            <van-dropdown-item title="价格" v-model="value1" :options="option2" />
+            <van-dropdown-item title="分类" v-model="CategoryValue" :options="filterCategory" @change="categoryChange"/>
         </van-dropdown-menu>
 
         <div>
@@ -25,23 +25,25 @@ export default {
     data() {
         return {
             value1: 0,
-            value2: 'a',
-            option1: [
-                { text: '全部商品', value: 0 },
-                { text: '新款商品', value: 1 },
-                { text: '活动商品', value: 2 },
-            ],
+            CategoryValue: 0,
             option2: [
-                { text: '默认排序', value: 'a' },
-                { text: '好评排序', value: 'b' },
-                { text: '销量排序', value: 'c' },
+                { text: '由高到低', value: 0 },
+                { text: '由低到高', value: 'b' }
             ],
         };
     },
     components:{
         Products
     },
-    props:['searchTipList',"filterCategory","searchGoodsList"]
+    props:['searchTipList',"filterCategory","searchGoodsList"],
+    methods:{
+        //组件数据子传父 点击搜索分类
+        categoryChange(value){
+            // value 是id
+            // console.log(value);
+            this.$emit("categoryChange",value);
+        }
+    }
 };
 </script>
 

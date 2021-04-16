@@ -31,6 +31,7 @@
             :searchTipList="searchTipList"
             :filterCategory="filterCategory"
             :searchGoodsList="searchGoodsList"
+            @categoryChange="categoryChange"
         ></SearchProducts>
     </div>
   
@@ -73,17 +74,48 @@ export default {
             searchGoodsList:[],
             // 搜索结果商品分类
             filterCategory:[],
+
+            // 商品价格排序
+            order:'desc',
+            // 分类id
+            categoryId:0,
+            // 搜索方式
+            sort:"id"
             
         };
     },
     methods: {
+        // 点击分类搜索 来自子组件的自定义事件
+        categoryChange(value){
+            this.categoryId = value;
+            this.onSearch(this.searchVal);
+        },
+        // enter 输入的值
         onSearch(val) {
-            // enter 输入的值
             this.blockShow = 3;
-            GetSearchGoodListData({keyword:val}).then(result=>{
-                console.log(result.data.data);
+            // 发送请求
+            GetSearchGoodListData({
+                // 接口文档决定的
+                keyword:val,    // 搜索关键字
+                page:1,         // 页数 默认1
+                size:20,        // 一页显示个数 默认20
+                order:this.order,     // 排序方式  默认desc高到低， asc低到高
+                categoryId:this.categoryId,   // 类别id 默认0
+                sort:this.sort         // 搜索方式 id或price
+                }).then(result=>{
+                // console.log(result.data.data);
                 this.searchGoodsList = result.data.data.goodsList;
-                this.filterCategory=result.data.data.filterCategory;
+
+                // 替换 响应的数组的数据的属性名和VantUI的属性名不一致
+                let newArr = JSON.parse(
+                    JSON.stringify(result.data.data.filterCategory)
+                    .replace(/name/g,'text')
+                    .replace(/id/g,'value')
+                );
+                // console.log(newArr);
+                // this.filterCategory = result.data.data.filterCategory;
+                this.filterCategory = newArr;
+
             })
         },
         onCancel() {
