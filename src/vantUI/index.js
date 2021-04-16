@@ -9,7 +9,8 @@ import {
     List,
     Cell,
     DropdownMenu,
-    DropdownItem
+    DropdownItem,
+    Empty
 } from 'vant';
 
 // import 'vant/lib/search/style';
@@ -24,3 +25,4 @@ Vue
     .use(Cell)
     .use(DropdownMenu)
     .use(DropdownItem)
+    .use(Empty)

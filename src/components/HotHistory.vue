@@ -32,7 +32,8 @@
                     plain type="default" 
                     v-for="(item,index) in hotKeywordList" 
                     :key="index"
-                    :class="item.is_hot==1?'hotTagRed':''">
+                    :class="item.is_hot==1?'hotTagRed':''"
+                    @click = "tagClick(item.keyword)">
                     {{item.keyword}}
                 </van-tag>
             </div>
@@ -52,7 +53,7 @@ export default {
     methods:{
         // 点击tag标签 搜索商品
         tagClick(value){
-            // console.log(value);
+            console.log(value);
             this.$emit("tagClick",value)
         }
     }

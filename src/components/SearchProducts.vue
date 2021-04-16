@@ -8,12 +8,18 @@
             <van-dropdown-item title="分类" v-model="CategoryValue" :options="filterCategory" @change="categoryChange"/>
         </van-dropdown-menu>
 
-        <div>
-            <Products
-                :searchGoodsList="searchGoodsList"
-                :filterCategory="filterCategory"
-            ></Products>
-        </div>
+        <Products
+            v-if="searchGoodsList.length!==0"
+            :searchGoodsList="searchGoodsList"
+            :filterCategory="filterCategory"
+        ></Products>
+        <!-- 找不到数据时的空标签提示 -->
+        <van-empty 
+            v-else
+            class="custom-image"
+            image="https://img01.yzcdn.cn/vant/custom-empty-image.png" 
+            description="目前没有该商品" 
+        />
 
     </div>
 </template>
