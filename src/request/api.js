@@ -29,3 +29,8 @@ export const GetSearchGoodListData = (params) => {
         // }
     })
 };
+
+// 清除历史记录
+export const ClearHistoryData = () => {
+    return request.post('/search/clearhistory')
+};

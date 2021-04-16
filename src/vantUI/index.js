@@ -10,7 +10,8 @@ import {
     Cell,
     DropdownMenu,
     DropdownItem,
-    Empty
+    Empty,
+    Toast
 } from 'vant';
 
 // import 'vant/lib/search/style';
@@ -26,3 +27,4 @@ Vue
     .use(DropdownMenu)
     .use(DropdownItem)
     .use(Empty)
+    .use(Toast);

@@ -1,12 +1,12 @@
 <template>
     <div>
         <!-- 搜索历史记录 -->
-        <div class="hot-history">
+        <div class="hot-history" v-if="isShowHistory">
             <!-- top tittle-->
             <div class="top">
                 <h3>浏览历史记录</h3>
                 <!-- 删除icon -->
-                <van-icon name="delete" />
+                <van-icon name="delete" @click="clearHistory"/>
             </div>
             <!-- bottom tags-->
             <div class="bottom">
@@ -42,11 +42,13 @@
 </template>
 
 <script>
+// 引入请求接口api
+import { ClearHistoryData } from '@/request/api.js'
+
 export default {
     data(){
         return {
-
-
+            isShowHistory:true
         }
     },
     props: ['historyKeywordList',"hotKeywordList"],
@@ -55,6 +57,21 @@ export default {
         tagClick(value){
             console.log(value);
             this.$emit("tagClick",value)
+        },
+        // 点击icon删除历史记录
+        clearHistory(){
+            ClearHistoryData().then(result=>{
+                // console.log(result.data);
+                if(result.data.errno == 0){
+                    //console.log('删除成功');
+                    // toast轻提示
+                    this.$toast.success('删除成功');
+                    // v-if 隐藏历史记录
+                    setTimeout(()=>{
+                        this.isShowHistory = false;
+                    },500)
+                }
+            });
         }
     }
 }
