@@ -11,7 +11,9 @@ import {
     DropdownMenu,
     DropdownItem,
     Empty,
-    Toast
+    Toast,
+    Tabbar,
+    TabbarItem
 } from 'vant';
 
 // import 'vant/lib/search/style';
@@ -27,4 +29,6 @@ Vue
     .use(DropdownMenu)
     .use(DropdownItem)
     .use(Empty)
-    .use(Toast);
+    .use(Toast)
+    .use(Tabbar)
+    .use(TabbarItem);

@@ -8,7 +8,9 @@ const routes = [{
         //重定向
         path: '/',
         redirect: '/home'
-    }, {
+    },
+    {
+        // 主页
         path: '/home',
         name: 'Home',
         component: Home,
@@ -21,6 +23,35 @@ const routes = [{
                     import ( /* webpackChunkName: "SearchPopup" */ '../views/SearchPopup.vue')
             }
         ]
+    },
+    // TabBar 选项栏
+    {
+        //tabbar Special专题选项
+        path: '/special',
+        name: 'Special',
+        component: () =>
+            import ( /* webpackChunkName: "Topic */ '../views/Special.vue')
+    },
+    {
+        // tabbar 分类选项
+        path: '/category',
+        name: 'Category',
+        component: () =>
+            import ( /* webpackChunkName: "Category */ '../views/Category.vue')
+    },
+    {
+        // tabbar 购物车选项
+        path: '/cart',
+        name: 'Cart',
+        component: () =>
+            import ( /* webpackChunkName: "Cart */ '../views/Cart.vue')
+    },
+    {
+        // tabbar 我的选项
+        path: '/user',
+        name: 'User',
+        component: () =>
+            import ( /* webpackChunkName: "User */ '../views/User.vue')
     }
     // {
     //   path: '/about',

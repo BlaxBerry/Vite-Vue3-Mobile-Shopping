@@ -2,8 +2,26 @@
   <div id="app">
     
     <router-view/>
+
+    <TabBar></TabBar>
   </div>
 </template>
+
+<script>
+// 导入 TabBar 组件
+import TabBar from '@/components/TabBar.vue'
+
+export default {
+  data(){
+    return {
+
+    }
+  },
+  components:{
+    TabBar
+  }
+}
+</script>
 
 <style lang="less">
 #app {
