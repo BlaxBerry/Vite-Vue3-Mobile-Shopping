@@ -3,12 +3,12 @@
         <!-- user 我的 -->
 
         <!-- VantUI layout布局组件 -->
-        <van-row @click="overlayShow=!overlayShow">
+        <van-row>
             <van-col span="8">
-                <img src="../assets/logo.png" alt="">
+                <img :src="avatarSrc" alt="">
             </van-col>
-            <van-col span="12">用户登陆</van-col>
-            <van-col span="4" >
+            <van-col span="12">{{nickname}}</van-col>
+            <van-col span="4" @click="overlayShow=!overlayShow">
                 <van-icon name="arrow"/>
             </van-col>
         </van-row>
@@ -64,6 +64,10 @@
 </template>
 
 <script>
+// 引入接口请求api
+import {GoLogin} from "@/request/api";
+import Vue from 'vue';
+
 export default {
     data() {
         return {
@@ -72,13 +76,57 @@ export default {
             // 表单
             username: '',
             password: '',
+            // 登陆请求信息
+            nickname: "用户登陆",
+            avatarSrc: "https://www.dentalspeed.com/imgs/topo/icones/user.svg"
         };
     },
     // 登陆表单信息提交
     methods: {
         onSubmit(values) {
-            console.log('submit', values);
-            this.overlayShow=!this.overlayShow
+            // values是个对象{“用户名”“密码”}
+            // console.log('submit', values);
+            // console.log(values["用户名"],values["密码"]);
+
+            // 发送登陆请求
+            // 接口用户信息例子：  
+            //              username:默认用户,pwd:111111
+            //              username:日,pwd:111111
+            GoLogin({ 
+                username:values["用户名"],
+                pwd:values["密码"]
+            }).then((result)=>{
+
+                console.log(result.data);
+                
+                if(result.data.errno == 0){
+                    // 1.示登陆成功
+                    Vue.prototype.$toast.success("登陆成功")
+
+                    // 2.保存token到本地
+                    localStorage.setItem("token",result.data.data.token);
+                    localStorage.setItem("userInfo",JSON.stringify(result.data.data.userInfo))
+                    
+                    setTimeout(()=>{
+
+                        // 3.遮罩层隐藏
+                        this.overlayShow=!this.overlayShow;
+                        // 4.将数据渲染到页面
+                        this.nickname = result.data.data.userInfo.username;
+                        this.avatarSrc = result.data.data.userInfo.avatar;                   
+                    },1000)
+
+                }else{
+                     // 提示登陆失败
+                     Vue.prototype.$toast("登陆失败 " + result.data.errmsg)
+                    // 遮罩层隐藏
+                      setTimeout(()=>{
+                         this.overlayShow=!this.overlayShow;
+                    },1000)
+                }
+            })
+
+
         },
     },
 };

@@ -22,15 +22,15 @@ export const GetSearchTipListData = (params) => {
 
 // 搜索弹 搜索结果商品列表
 export const GetSearchGoodListData = (params) => {
-    return request.get('/goods/list', {
-        params
-        // params: {
-        //     keyword: ''
-        // }
-    })
+    return request.get('/goods/list', { params })
 };
 
 // 清除历史记录
 export const ClearHistoryData = () => {
     return request.post('/search/clearhistory')
+};
+
+//登陆请求
+export const GoLogin = (params) => {
+    return request.post('/auth/loginByWeb', params)
 };
