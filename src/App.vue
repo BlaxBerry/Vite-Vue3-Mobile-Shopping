@@ -3,7 +3,7 @@
     
     <router-view/>
 
-    <TabBar></TabBar>
+    <TabBar v-show="$route.meta.isShowTabBar"></TabBar>
   </div>
 </template>
 
@@ -14,7 +14,6 @@ import TabBar from '@/components/TabBar.vue'
 export default {
   data(){
     return {
-
     }
   },
   components:{

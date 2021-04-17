@@ -14,7 +14,8 @@ const routes = [{
         path: '/home',
         name: 'Home',
         meta: {
-            TabBarActiveNumber: 0
+            TabBarActiveNumber: 0,
+            isShowTabBar: true
         },
         component: Home,
         children: [
@@ -32,7 +33,8 @@ const routes = [{
         path: '/special',
         name: 'Special',
         meta: {
-            TabBarActiveNumber: 1
+            TabBarActiveNumber: 1,
+            isShowTabBar: true
         },
         component: () =>
             import ( /* webpackChunkName: "Topic */ '../views/Special.vue')
@@ -42,7 +44,8 @@ const routes = [{
         path: '/category',
         name: 'Category',
         meta: {
-            TabBarActiveNumber: 2
+            TabBarActiveNumber: 2,
+            isShowTabBar: true
         },
         component: () =>
             import ( /* webpackChunkName: "Category */ '../views/Category.vue')
@@ -52,7 +55,8 @@ const routes = [{
         path: '/cart',
         name: 'Cart',
         meta: {
-            TabBarActiveNumber: 3
+            TabBarActiveNumber: 3,
+            isShowTabBar: true
         },
         component: () =>
             import ( /* webpackChunkName: "Cart */ '../views/Cart.vue')
@@ -62,7 +66,8 @@ const routes = [{
         path: '/user',
         name: 'User',
         meta: {
-            TabBarActiveNumber: 4
+            TabBarActiveNumber: 4,
+            isShowTabBar: true
         },
         component: () =>
             import ( /* webpackChunkName: "User */ '../views/User.vue')
