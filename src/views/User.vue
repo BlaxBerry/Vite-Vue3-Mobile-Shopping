@@ -97,7 +97,7 @@ export default {
                 pwd:values["密码"]
             }).then((result)=>{
 
-                console.log(result.data);
+                // console.log(result.data);
                 
                 if(result.data.errno == 0){
                     // 1.示登陆成功
@@ -129,6 +129,19 @@ export default {
 
         },
     },
+    created(){
+        // 判断用户是否已经登陆
+        // 判断localStorage中是否存有POST登陆请求获得的token
+        let token = localStorage.getItem('token')
+        if(token){
+            // 用户已经是登陆状态了
+            // 渲染页面
+            let localStorageUserInfo = localStorage.getItem('userInfo')
+            this.nickname = JSON.parse(localStorageUserInfo).username;
+            this.avatarSrc = JSON.parse(localStorageUserInfo).avatar;
+        }
+        
+    }
 };
 </script>
 
