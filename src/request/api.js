@@ -20,7 +20,7 @@ export const GetSearchTipListData = (params) => {
     })
 };
 
-// 搜索弹 搜索结果商品列表
+// 搜索结果商品列表
 export const GetSearchGoodListData = (params) => {
     return request.get('/goods/list', { params })
 };
@@ -33,4 +33,9 @@ export const ClearHistoryData = () => {
 //登陆请求
 export const GoLogin = (params) => {
     return request.post('/auth/loginByWeb', params)
+};
+
+// 搜索商品详情明细
+export const GetGoodDetailData = (params) => {
+    return request.get('/goods/detail', { params })
 };

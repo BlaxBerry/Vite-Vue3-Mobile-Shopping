@@ -2,7 +2,7 @@
     <div>
         <!-- 单个商品 -->
         <ul>
-            <li v-for="item in searchGoodsList" :key="item.id">
+            <li v-for="item in searchGoodsList" :key="item.id" @click="toProductDetail(item.id)">
                 <img :src="item.list_pic_url" alt="" style="display:block" width="100%">
                 <div class="van-ellipsis">{{item.name}}</div>
                 <div class="price">{{item.retail_price | RMBformat}}</div>
@@ -16,7 +16,13 @@ export default {
     data(){
         return {}
     },
-    props:['searchGoodsList',"filterCategory"]
+    props:['searchGoodsList',"filterCategory"],
+    methods:{
+        // 跳转到商品详情页
+        toProductDetail(id){
+            this.$router.push('/productDetail?id=' + id)
+        }
+    }
 }
 </script>
 

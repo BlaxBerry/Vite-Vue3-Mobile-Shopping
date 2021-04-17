@@ -66,6 +66,13 @@ const routes = [{
         },
         component: () =>
             import ( /* webpackChunkName: "User */ '../views/User.vue')
+    },
+    // 商品详情页
+    {
+        path: '/productDetail',
+        name: 'ProductDetail',
+        component: () =>
+            import ( /* webpackChunkName: "User */ '../views/ProductDetail.vue')
     }
     // {
     //   path: '/about',
