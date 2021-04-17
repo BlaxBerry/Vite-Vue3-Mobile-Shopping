@@ -13,6 +13,9 @@ const routes = [{
         // 主页
         path: '/home',
         name: 'Home',
+        meta: {
+            TabBarActiveNumber: 0
+        },
         component: Home,
         children: [
             //搜素弹出层，home子路由
@@ -24,11 +27,13 @@ const routes = [{
             }
         ]
     },
-    // TabBar 选项栏
     {
         //tabbar Special专题选项
         path: '/special',
         name: 'Special',
+        meta: {
+            TabBarActiveNumber: 1
+        },
         component: () =>
             import ( /* webpackChunkName: "Topic */ '../views/Special.vue')
     },
@@ -36,6 +41,9 @@ const routes = [{
         // tabbar 分类选项
         path: '/category',
         name: 'Category',
+        meta: {
+            TabBarActiveNumber: 2
+        },
         component: () =>
             import ( /* webpackChunkName: "Category */ '../views/Category.vue')
     },
@@ -43,6 +51,9 @@ const routes = [{
         // tabbar 购物车选项
         path: '/cart',
         name: 'Cart',
+        meta: {
+            TabBarActiveNumber: 3
+        },
         component: () =>
             import ( /* webpackChunkName: "Cart */ '../views/Cart.vue')
     },
@@ -50,6 +61,9 @@ const routes = [{
         // tabbar 我的选项
         path: '/user',
         name: 'User',
+        meta: {
+            TabBarActiveNumber: 4
+        },
         component: () =>
             import ( /* webpackChunkName: "User */ '../views/User.vue')
     }

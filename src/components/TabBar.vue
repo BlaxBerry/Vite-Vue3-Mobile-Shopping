@@ -14,9 +14,24 @@
 export default {
     data() {
         return {
-            active: 0,
+            // 选中的标签
+            // 应该是等同与相应的路由
+            // active: 0,
         };
     },
+    mounted(){
+        // console.log(this.$route.path);
+        // console.log(this.$route.meta.TabBarActiveNumber);
+    },
+    computed:{
+        active:{
+            get(){
+                return this.$route.meta.TabBarActiveNumber
+            },
+            set(){}
+            
+        }
+    }
 };
 </script>
 
