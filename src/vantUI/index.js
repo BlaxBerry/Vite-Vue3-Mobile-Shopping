@@ -21,7 +21,8 @@ import {
     Overlay,
     Form,
     Field,
-    Button
+    Button,
+    Divider
 } from 'vant';
 
 // import 'vant/lib/search/style';
@@ -47,4 +48,5 @@ Vue
     .use(Overlay)
     .use(Form)
     .use(Field)
-    .use(Button);
+    .use(Button)
+    .use(Divider);

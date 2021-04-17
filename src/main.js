@@ -9,7 +9,7 @@ import 'reset-css'
 
 // 全局过滤器 商品价格
 Vue.filter('RMBformat', val => {
-    return "¥ " + val + " RMB";
+    return "¥ " + Number(val).toFixed(2) + " RMB";
 })
 
 Vue.config.productionTip = false
