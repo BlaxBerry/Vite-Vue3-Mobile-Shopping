@@ -102,7 +102,9 @@ router.beforeEach((to, from, next) => {
             //跳转到 User我的页面
             setTimeout(() => {
                 next("/user")
-            }, 1000)
+            }, 1000);
+
+            return
         }
 
     }
