@@ -103,10 +103,8 @@ router.beforeEach((to, from, next) => {
             setTimeout(() => {
                 next("/user")
             }, 1000);
-
-            return
         }
-
+        // return
     }
 
     next()

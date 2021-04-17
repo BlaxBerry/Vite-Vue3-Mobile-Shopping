@@ -13,7 +13,15 @@ import {
     Empty,
     Toast,
     Tabbar,
-    TabbarItem
+    TabbarItem,
+    Col,
+    Row,
+    Grid,
+    GridItem,
+    Overlay,
+    Form,
+    Field,
+    Button
 } from 'vant';
 
 // import 'vant/lib/search/style';
@@ -31,4 +39,12 @@ Vue
     .use(Empty)
     .use(Toast)
     .use(Tabbar)
-    .use(TabbarItem);
+    .use(TabbarItem)
+    .use(Col)
+    .use(Row)
+    .use(Grid)
+    .use(GridItem)
+    .use(Overlay)
+    .use(Form)
+    .use(Field)
+    .use(Button);
