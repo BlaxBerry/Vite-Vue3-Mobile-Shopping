@@ -83,4 +83,32 @@ const router = new VueRouter({
     routes
 })
 
+// 路由守卫
+router.beforeEach((to, from, next) => {
+    // console.log("to", to);
+    // console.log("from", from);
+
+    let token = localStorage.getItem("token");
+    // 购物车
+    if (to.path == "/cart") {
+        // 判断是否登陆
+        // 判断是否有token值
+        if (token) {
+            next();
+        } else {
+            // 提示未登陆
+            // Toast("还没登陆，请先登陆")
+            Vue.prototype.$toast("还没登陆，请先登陆");
+            //跳转到 User我的页面
+            setTimeout(() => {
+                next("/user")
+            }, 1000)
+        }
+
+    }
+
+    next()
+})
+
+
 export default router
