@@ -199,13 +199,14 @@ export default {
     li {
         list-style:square;
         margin-left: 0.20rem;
+        width: 100%;
     }
     h3 {
-        font-size: 0.18rem;
+        font-size: 0.15rem;
         font-weight: 700;
     }
     p {
-        font-size: 0.13rem;
+        font-size: 0.12rem;
         padding:0.20rem 0;
     }
 }
