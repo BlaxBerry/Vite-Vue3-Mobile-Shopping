@@ -8,7 +8,7 @@
                 <img :src="avatarSrc" alt="">
             </van-col>
             <van-col span="12">{{nickname}}</van-col>
-            <van-col span="4" @click="overlayShow=!overlayShow">
+            <van-col span="4" @click="loginShow">
                 <van-icon name="arrow"/>
             </van-col>
         </van-row>
@@ -128,6 +128,17 @@ export default {
 
 
         },
+        // 根据loaclStorage中是否有token判断用户是否登陆过，决定是否还显示登陆界面
+        loginShow(){
+            let token = localStorage.getItem('token')
+            if(token){
+                // 如果用户已经登陆
+                return
+            }else{
+                // 用户没有登陆过
+                this.overlayShow=!this.overlayShow
+            }
+        }
     },
     created(){
         // 判断用户是否已经登陆
