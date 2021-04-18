@@ -12,23 +12,34 @@
                 v-for="item in cartList" :key="item.id"
                 @click="changeChecked(item)"
                 >
-                <!-- VantUI card卡片 -->
-                <van-card
-                    :num="item.number"
-                    :price="item.retail_price.toFixed(2)"
-                    :title="item.goods_name"
-                    :thumb="item.list_pic_url"
-                />
-                <!-- VantUI stepper步进器 -->
-                <van-stepper 
-                    v-model="item.number" 
-                    v-show="isShowStepper"
-                    @change="stepperChange(item)"
-                />
+
+                <van-swipe-cell>
+                    <!-- VantUI card卡片 -->
+                    <van-card
+                        :num="item.number"
+                        :price="item.retail_price.toFixed(2)"
+                        :title="item.goods_name"
+                        :thumb="item.list_pic_url"
+                    />
+                    <!-- VantUI stepper步进器 -->
+                    <van-stepper 
+                        v-model="item.number" 
+                        v-show="isShowStepper"
+                        @change="stepperChange(item)"
+                    />                    
+                    
+                    <!-- VantUI 右侧向左滑动删除 -->
+                    <template #right>
+                        <van-button square type="danger" text="删除" @click="delGood(item)"/>
+                    </template>
+
+                </van-swipe-cell>
+
             </van-checkbox>
-                        
+
         </van-checkbox-group>
         
+
         <!-- VantUI submitBar提交定档 -->
         <van-submit-bar 
             :price="cartTotal.checkedGoodsAmount * 100" 
@@ -64,7 +75,8 @@ import Tips from "@/components/Tips.vue"
 import { 
     GetCartListData, 
     ChangeCartGoodChecked,
-    CartStepperDataUpdate
+    CartStepperDataUpdate,
+    DeleteGood
 } from '@/request/api.js'
 
 
@@ -129,7 +141,26 @@ export default {
         }
     },
     methods:{
-        onSubmit(){},
+        // 提交按钮
+        onSubmit(){
+            if(this.cartList.length==0){
+                this.$toast("不能提交一个空的购物车～")
+            }else { 
+                this.$toast('Sorry, 该功能尚未开放，请等待更新')
+            }
+        },
+        // 删除商品
+        delGood(item){
+            // console.log(item.product_id);
+            // 发送列表数据给后台
+            DeleteGood({
+                productIds:item.product_id.toString()
+            }).then(result=>{
+                // console.log(result.data);
+                // 将获得的新的列表渲染给页面
+                this.totalFn(result.data)
+            })
+        },
         // 商品数量编辑按钮
         onClickEdit(){
             // 显示隐藏步进器
@@ -243,5 +274,10 @@ export default {
 // 步进器
 .van-stepper {
     text-align: right;
+}
+
+
+.van-swipe-cell .van-button{
+    height: 100%;
 }
 </style>

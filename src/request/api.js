@@ -69,3 +69,8 @@ export const ChangeCartGoodChecked = (params) => {
 export const CartStepperDataUpdate = (params) => {
     return request.post('/cart/update', params)
 };
+
+// 删除商品
+export const DeleteGood = (params) => {
+    return request.post('/cart/delete', params)
+};

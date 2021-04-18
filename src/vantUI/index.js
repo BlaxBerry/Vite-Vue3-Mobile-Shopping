@@ -31,7 +31,8 @@ import {
     CheckboxGroup,
     Card,
     SubmitBar,
-    Stepper
+    Stepper,
+    SwipeCell
 } from 'vant';
 
 // import 'vant/lib/search/style';
@@ -68,3 +69,4 @@ Vue
     .use(Card)
     .use(SubmitBar)
     .use(Stepper)
+    .use(SwipeCell);
