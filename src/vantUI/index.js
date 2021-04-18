@@ -26,7 +26,11 @@ import {
     GoodsAction,
     GoodsActionIcon,
     GoodsActionButton,
-    Sku
+    Sku,
+    Checkbox,
+    CheckboxGroup,
+    Card,
+    SubmitBar
 } from 'vant';
 
 // import 'vant/lib/search/style';
@@ -57,4 +61,8 @@ Vue
     .use(GoodsAction)
     .use(GoodsActionButton)
     .use(GoodsActionIcon)
-    .use(Sku);
+    .use(Sku)
+    .use(Checkbox)
+    .use(CheckboxGroup)
+    .use(Card)
+    .use(SubmitBar)

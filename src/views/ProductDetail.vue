@@ -288,16 +288,17 @@ export default {
         line-height: 0.40rem;
         border-radius: 0.10rem;
         display: flex;
+        width: 100%;
 
         .leftAttrName {
             flex:3;
             text-align: right;
             padding-right: 0.10rem;
-            font-size: 0.10rem;
+            font-size: 0.08rem;
         }
         .rightAttrValue {
             flex: 7;
-            font-size: 0.16rem;
+            font-size: 0.15rem;
         }
     }
 }
