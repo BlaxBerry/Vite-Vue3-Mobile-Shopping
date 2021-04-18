@@ -49,3 +49,8 @@ export const RelatedGoodListData = (params) => {
 export const GetCartGoodsCount = () => {
     return request.get('/cart/goodscount')
 };
+
+// 加入购物车
+export const AddToCart = (params) => {
+    return request.post('/cart/add', params)
+};

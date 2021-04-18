@@ -67,6 +67,7 @@
 
         <!-- Sku商品规格 -->
         <van-sku
+            ref="sku"
             v-model="isShowSku"
             :sku="sku"
             :goods="goods"
@@ -88,7 +89,8 @@
 import {
     GetGoodDetailData, 
     RelatedGoodListData, 
-    GetCartGoodsCount
+    GetCartGoodsCount,
+    // AddToCart // 添加请求接口损坏
 } from "@/request/api.js"
 // 引入 Tips小提示组件
 import Tips from "@/components/Tips.vue"
@@ -105,7 +107,7 @@ export default {
         return {
             // 轮播图数组
             bannerSwipeGallery:[],
-            // 商品信息（名称，描述信息，价格）
+            // 商品信息（名称，描述信息，价格）info
             productInfo:'',
             // 商品规格参数
             productAttr:'',
@@ -115,6 +117,8 @@ export default {
             productIssue:'',
             // 相关商品列表（大家都在看）
             relatedGoodsList:[],
+            // 产品列表
+            productList:[],
 
             // Sku商品规格弹出层
             // Sku显示隐藏
@@ -164,6 +168,8 @@ export default {
             this.good_desc = this.productInfo.goods_desc;
             // 常见问题
             this.productIssue = result.data.data.issue;
+            // 产品列表
+            this.productList = result.data.data.productList;
 
             // Sku商品规格数据
             // Sku 商品缩略图
@@ -197,11 +203,41 @@ export default {
             //  若sku商品规格弹出层已经展示状态，则直接跳转cart购物车页面
             if(this.isShowSku){
                 //加入购物车
-                Vue.prototype.$toast.success('加入购物车')
+                
+                // 1.获取添加的商品数量
+                // VantUI提供的方法
+                // this.$refs.sku.getSkuData().selectedNum;
+                // console.log(this.$refs.sku.getSkuData().selectedNum);
+
+                // 2.发送请求 加入购物车
+                // this.addCart({
+                //     // 商品ID
+                //     goodsId:this.productList[0].goods_id,
+                //     //产品ID
+                //     productID:this.productList[0].id,
+                //     //数量
+                //     number:this.$refs.sku.getSkuData().selectedNum
+                // });
+                // “/cart/add” 接口损坏
+                Vue.prototype.$toast('Sorry，服务器接口错误，无法添加数据到购物车');
+
+                //  3.跳转到购物车页面
+                this.$router.push('/cart');
+
             }else{
                 this.isShowSku=true;
             }
-        }
+        },
+        // 发送请求 加入购物车
+        // addCart(params){
+        //     AddToCart(params).then((result)=>{
+        //         console.log(result);
+        //         // 更新GoodsAction购物车商品数量
+        //         // this.cartGoodsCount=result.data.data.cartTotal.goodsCount;
+        //         //  跳转到购物车页面
+        //         this.$router.push('/cart');
+        //     })
+        // }
     }
 }
 </script>

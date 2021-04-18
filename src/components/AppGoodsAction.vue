@@ -42,7 +42,7 @@ export default {
     methods:{
         // 点击 加入购物车 
         toAddCart(){
-            this.$emit('toAddCart')
+            this.$emit('toAddCart') //ProductDetail.vue
         },
         // 点击 立即购买 
         toBuyNow(){
