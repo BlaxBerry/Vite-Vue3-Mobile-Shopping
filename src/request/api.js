@@ -44,3 +44,8 @@ export const GetGoodDetailData = (params) => {
 export const RelatedGoodListData = (params) => {
     return request.get('/goods/related', { params })
 };
+
+// 获取购物车商品数量
+export const GetCartGoodsCount = () => {
+    return request.get('/cart/goodscount')
+};

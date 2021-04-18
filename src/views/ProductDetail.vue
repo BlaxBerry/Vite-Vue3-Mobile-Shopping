@@ -75,14 +75,21 @@
         />
 
         <!-- GoodsAction商品导航 -->
-        <AppGoodsAction @toAddCart="toAddCart"></AppGoodsAction>
+        <AppGoodsAction 
+            @toAddCart="toAddCart"
+            :cartGoodsCount="cartGoodsCount"
+        ></AppGoodsAction>
 
     </div>
 </template>
 
 <script>
 // 引入接口请求 api
-import {GetGoodDetailData, RelatedGoodListData} from "@/request/api.js"
+import {
+    GetGoodDetailData, 
+    RelatedGoodListData, 
+    GetCartGoodsCount
+} from "@/request/api.js"
 // 引入 Tips小提示组件
 import Tips from "@/components/Tips.vue"
 // 引入商品组件
@@ -129,6 +136,9 @@ export default {
             },
             // 限购数量
             quota:5,
+
+            // 购物车商品数量
+            cartGoodsCount:0
         }
     },
     components:{
@@ -163,8 +173,6 @@ export default {
             // sku 价格
             this.sku.price = (this.productInfo.retail_price).toFixed(2);
 
-           
-
         })
 
         // 发送请求，获得相关产品数据（大家都在看）
@@ -174,6 +182,12 @@ export default {
         }).then(result=>{
             // console.log(result.data.data);
             this.relatedGoodsList=result.data.data.goodsList;
+        })
+
+        // 发送请求，获取购物车商品数量
+        GetCartGoodsCount().then(result=>{
+            // console.log(result.data.data.cartTotal);
+            this.cartGoodsCount = result.data.data.cartTotal.goodsCount;
         })
     },
     methods:{

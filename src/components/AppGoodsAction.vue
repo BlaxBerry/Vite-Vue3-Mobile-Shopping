@@ -10,7 +10,11 @@
                 :color="isCollected?'#ff5000':'#333'"
                 @click="isCollected=!isCollected"
             />
-            <van-goods-action-icon icon="cart-o" text="购物车" badge="15" />
+            
+            <!-- 购物车商品数量 -->
+            <van-goods-action-icon 
+                icon="cart-o" text="购物车" 
+                :badge="cartGoodsCount" />
             
             <!-- 加入购物车 按钮 -->
             <van-goods-action-button 
@@ -44,7 +48,8 @@ export default {
         toBuyNow(){
             this.$toast('Sorry，该功能尚未开放，请等待更新')
         }
-    }
+    },
+    props:["cartGoodsCount"]
 }
 </script>
 
