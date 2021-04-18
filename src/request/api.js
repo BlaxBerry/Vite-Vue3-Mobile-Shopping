@@ -39,3 +39,8 @@ export const GoLogin = (params) => {
 export const GetGoodDetailData = (params) => {
     return request.get('/goods/detail', { params })
 };
+
+// 相关商品推荐列表
+export const RelatedGoodListData = (params) => {
+    return request.get('/goods/related', { params })
+};

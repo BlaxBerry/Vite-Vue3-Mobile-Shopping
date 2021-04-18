@@ -57,10 +57,10 @@
         </div>
 
         <!-- 推荐商品部分 -->
-        <!-- <div class="recommendation">
+        <div class="recommendation">
              <van-divider>大家都在看</van-divider>
-             <Products></Products>
-        </div> -->
+             <Products :searchGoodsList="relatedGoodsList"></Products>
+        </div>
 
         <!-- GoodsAction商品导航 -->
         <AppGoodsAction></AppGoodsAction>
@@ -70,11 +70,11 @@
 
 <script>
 // 引入接口请求 api
-import {GetGoodDetailData} from "@/request/api.js"
+import {GetGoodDetailData, RelatedGoodListData} from "@/request/api.js"
 // 引入 Tips小提示组件
 import Tips from "@/components/Tips.vue"
 // 引入商品组件
-// import Products from '@/components/Products.vue'
+import Products from '@/components/Products.vue'
 // 引入 GoodsAction 商品导航
 import AppGoodsAction from "@/components/AppGoodsAction.vue"
 
@@ -91,13 +91,15 @@ export default {
             // 商品详细信息
             good_desc:'',
             // 常见问题
-            productIssue:''
+            productIssue:'',
+            // 相关商品列表（大家都在看）
+            relatedGoodsList:[]
         }
     },
     components:{
         Tips,
-        AppGoodsAction
-        // Products
+        AppGoodsAction,
+        Products
     },
     created(){
         // 发送请求，获得该商品的详情
@@ -116,6 +118,15 @@ export default {
             this.good_desc = this.productInfo.goods_desc;
             // 常见问题
             this.productIssue = result.data.data.issue;
+        })
+
+        // 发送请求，获得相关产品数据（大家都在看）
+        RelatedGoodListData({
+             // 传入商品id作为请求参数
+            id:this.$route.query.id
+        }).then(result=>{
+            console.log(result.data.data);
+            this.relatedGoodsList=result.data.data.goodsList;
         })
     }
 }
@@ -221,5 +232,6 @@ export default {
 .recommendation {
     background-color: #fff;
     padding:0.20rem;
+    margin: 0.20rem 0;
 }
 </style>
