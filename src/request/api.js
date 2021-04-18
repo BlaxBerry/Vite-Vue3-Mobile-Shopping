@@ -54,3 +54,8 @@ export const GetCartGoodsCount = () => {
 export const AddToCart = (params) => {
     return request.post('/cart/add', params)
 };
+
+// 获取购物车列表数据
+export const GetCartListData = () => {
+    return request.get('/cart/index')
+};
