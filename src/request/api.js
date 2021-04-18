@@ -64,3 +64,8 @@ export const GetCartListData = () => {
 export const ChangeCartGoodChecked = (params) => {
     return request.post('/cart/checked', params)
 };
+
+// 购物车步进器 商品数量变化（stepper）
+export const CartStepperDataUpdate = (params) => {
+    return request.post('/cart/update', params)
+};

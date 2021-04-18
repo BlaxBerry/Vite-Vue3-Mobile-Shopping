@@ -21,8 +21,9 @@
                 />
                 <!-- VantUI stepper步进器 -->
                 <van-stepper 
-                    v-model="stepperValue" 
+                    v-model="item.number" 
                     v-show="isShowStepper"
+                    @change="stepperChange(item)"
                 />
             </van-checkbox>
                         
@@ -62,7 +63,8 @@ import Tips from "@/components/Tips.vue"
 // 引入请求接口api
 import { 
     GetCartListData, 
-    ChangeCartGoodChecked
+    ChangeCartGoodChecked,
+    CartStepperDataUpdate
 } from '@/request/api.js'
 
 
@@ -79,8 +81,7 @@ export default {
             // 购物车总计数据
             cartTotal:{},
 
-            // Stepper 步进器 步数
-            stepperValue:1,
+            // Stepper 步进器
             // 步进器显示隐藏
             isShowStepper:false
         }
@@ -134,6 +135,24 @@ export default {
             // 显示隐藏步进器
             this.isShowStepper=!this.isShowStepper;
         },
+        // 步进器 数值变化
+        stepperChange(item){
+            // 触发一次，获得所有
+            // console.log("number:"+item.number);
+            // console.log('goodsId:'+item.goods_id);
+            // console.log('id：',item.id);
+            // 将变化的数值发送给后端
+            CartStepperDataUpdate({
+                goodsId:item.goods_id,
+                id:item.id,
+                number:item.number,
+                productId:item.product_id
+            }).then(result=>{
+                // console.log(result.data);
+                // 获取商品数据，并渲染页面
+                this.totalFn(result.data)
+            })
+        },
 
         // 切换商品选中状态
         changeChecked(item){
@@ -154,7 +173,7 @@ export default {
         },
 
         totalFn(data){
-            console.log(data.data);
+            // console.log(data.data);
             this.cartList = data.data.cartList;
             this.cartTotal = data.data.cartTotal;
 
