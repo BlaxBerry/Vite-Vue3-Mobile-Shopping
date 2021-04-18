@@ -6,7 +6,7 @@
         <Tips></Tips>
 
         <!-- VantUI checkbox复选框 -->
-        <van-checkbox-group v-model="result">
+        <van-checkbox-group v-model="result" :disabled="isShowStepper">
             <van-checkbox 
                 :name="item.id" 
                 v-for="item in cartList" :key="item.id"
@@ -19,6 +19,11 @@
                     :title="item.goods_name"
                     :thumb="item.list_pic_url"
                 />
+                <!-- VantUI stepper步进器 -->
+                <van-stepper 
+                    v-model="stepperValue" 
+                    v-show="isShowStepper"
+                />
             </van-checkbox>
                         
         </van-checkbox-group>
@@ -30,17 +35,19 @@
             @submit="onSubmit">
 
             <!-- 全选框 -->
-            <van-checkbox v-model="checkedAll">全选</van-checkbox>
+            <van-checkbox v-model="checkedAll" :disabled="isShowStepper">全选</van-checkbox>
 
             <template #tip>
                 共计 
                 <span class="totalNum">{{cartTotal.checkedGoodsCount}}</span> 
-                件商品
+                件商品，编辑商品数量
+                <!-- 编辑按钮 -->
                 <van-button 
-                    @click="onClickEditCount" 
                     size="small" 
-                    type="primary">
-                    编辑商品数量
+                    :type="isShowStepper?'danger':'primary'"
+                    @click="onClickEdit"
+                >
+                    {{isShowStepper?"完成":"编辑"}}
                 </van-button> 
             </template>
         </van-submit-bar>
@@ -70,7 +77,12 @@ export default {
             // 购物车商品列表
             cartList:[],
             // 购物车总计数据
-            cartTotal:{}
+            cartTotal:{},
+
+            // Stepper 步进器 步数
+            stepperValue:1,
+            // 步进器显示隐藏
+            isShowStepper:false
         }
     },
     components:{
@@ -117,10 +129,16 @@ export default {
     },
     methods:{
         onSubmit(){},
-        onClickEditCount(){},
+        // 商品数量编辑按钮
+        onClickEdit(){
+            // 显示隐藏步进器
+            this.isShowStepper=!this.isShowStepper;
+        },
 
         // 切换商品选中状态
         changeChecked(item){
+            // 点击编辑按钮后禁止单选框的选中
+            if(this.isShowStepper)return;
             // 告诉后端那些值被改变，后端接受后响应会处理过后的新数据
             ChangeCartGoodChecked({
                 // 选中状态
@@ -203,4 +221,8 @@ export default {
     
 }
 
+// 步进器
+.van-stepper {
+    text-align: right;
+}
 </style>
