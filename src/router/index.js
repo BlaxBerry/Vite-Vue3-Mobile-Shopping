@@ -110,13 +110,16 @@ router.beforeEach((to, from, next) => {
         } else {
             // 提示未登陆
             // Toast("还没登陆，请先登陆")
-            Vue.prototype.$toast("还没登陆，请先登陆");
+            Vue.prototype.$toast.loading({
+                message: "请先登陆...",
+                forbidClick: true,
+            });
             //跳转到 User我的页面
-            setTimeout(() => {
-                next("/user")
-            }, 1000);
+            // setTimeout(() => {
+            //     next("/user")
+            // }, 2000);
         }
-        // return
+        return
     }
 
     next()

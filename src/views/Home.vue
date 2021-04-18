@@ -1,5 +1,7 @@
 <template>
   <div class="home">
+    
+    <h1>Vue+VantUI 移动端电商项目</h1>
 
     <!-- search 搜索框 -->
     <van-search 
@@ -29,6 +31,17 @@
        <router-view></router-view>
     </transition> -->
 
+    <!-- 分类列表 -->
+    <div class="categoryList">
+        <Tips></Tips>
+        <div class="newGoods" v-for="item in categoryList" :key="item.id">
+            <van-divider>{{item.name}}</van-divider>
+            <Products
+                :searchGoodsList = "item.goodsList"
+            ></Products>
+        </div>
+    </div>
+
 </div>
 </template>
 
@@ -42,12 +55,20 @@
 // 导入 api中的接口请求（接口请求管理的JS文件）
 import {GetHomePageList} from '@/request/api.js'
 
+import Products from '@/components/Products.vue'
+import Tips from '@/components/Tips.vue'
+
 export default {
   name: 'Home',
   data(){
     return {
       SearchValue:'',
-      banner:[]        // 轮播图image_url
+      // 轮播图image_url
+      banner:[],        
+      // 新品发售
+      newGoodsList:[],
+      // 分类
+      categoryList:[]
     }
   },
   created(){
@@ -58,8 +79,13 @@ export default {
     .then((result)=>{
 
       // console.log(result.data.data);
+      console.log("\n\n项目说明：Vue + VantUI 电商项目(Mobile移动端)\n\n技术运用：Vue-cli4、vuex、vue-router、axios、LocalStorage\n\n");
+      // 轮播图
       this.banner = result.data.data.banner;
-
+      // 新品发售
+      this.newGoodsList = result.data.data.newGoodsList;
+      // 分类
+      this.categoryList = result.data.data.categoryList;
 
     })
     .catch((err)=>{
@@ -71,6 +97,8 @@ export default {
   },
   components: {
     // HelloWorld
+    Products,
+    Tips
   }
 }
 </script>
@@ -89,4 +117,21 @@ export default {
   // Popup 弹出层动画过渡结束后
   left: 0;
 }
+
+// 分类商品
+.categoryList {
+  padding-bottom: 0.50rem;
+
+  .newGoods {
+    background-color: #fff;
+    padding: 0.10rem 0.20rem;
+
+    .van-divider {
+      font-size: 0.20rem;
+      font-weight:700;
+      color: #000000;
+    }
+}
+}
+
 </style>
