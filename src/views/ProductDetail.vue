@@ -90,7 +90,7 @@ import {
     GetGoodDetailData, 
     RelatedGoodListData, 
     GetCartGoodsCount,
-    // AddToCart // 添加请求接口损坏
+    AddToCart // 添加请求接口损坏
 } from "@/request/api.js"
 // 引入 Tips小提示组件
 import Tips from "@/components/Tips.vue"
@@ -98,7 +98,6 @@ import Tips from "@/components/Tips.vue"
 import Products from '@/components/Products.vue'
 // 引入 GoodsAction 商品导航
 import AppGoodsAction from "@/components/AppGoodsAction.vue"
-import Vue from 'vue'
 
 
 
@@ -207,9 +206,27 @@ export default {
                 // 1.获取添加的商品数量
                 // VantUI提供的方法
                 // this.$refs.sku.getSkuData().selectedNum;
-                // console.log(this.$refs.sku.getSkuData().selectedNum);
+                console.log(this.$refs.sku.getSkuData().selectedNum);
+                console.log(this.productList[0].id);
+                console.log(this.productInfo.id);
 
                 // 2.发送请求 加入购物车
+                AddToCart({
+                    goodsId:21700,
+                    // goodsId:"1135058",
+                    // goodsId:this.$route.query.id,
+                    // goodsId:this.productInfo.id,
+                    productID:this.productList[0].id,
+                    number:this.$refs.sku.getSkuData().selectedNum
+                }).then(result=>{
+                    if(result.data.errno == 0){
+                        console.log(result.data);
+                        this.$toast.success("成功添加到购物车")
+                    }else {
+                        console.log(result.data);
+                        this.$toast('Sorry，无法添加商品，' + result.data.errmsg)
+                    }
+                })
                 // this.addCart({
                 //     // 商品ID
                 //     goodsId:this.productList[0].goods_id,
@@ -218,11 +235,15 @@ export default {
                 //     //数量
                 //     number:this.$refs.sku.getSkuData().selectedNum
                 // });
+
+
+
+
                 // “/cart/add” 接口损坏
-                Vue.prototype.$toast('Sorry，服务器接口错误，无法添加数据到购物车');
+                // Vue.prototype.$toast('Sorry，服务器接口错误，无法添加数据到购物车');
 
                 //  3.跳转到购物车页面
-                this.$router.push('/cart');
+                // this.$router.push('/cart');
 
             }else{
                 this.isShowSku=true;

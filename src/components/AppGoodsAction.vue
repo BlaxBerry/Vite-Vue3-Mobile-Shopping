@@ -14,7 +14,9 @@
             <!-- 购物车商品数量 -->
             <van-goods-action-icon 
                 icon="cart-o" text="购物车" 
-                :badge="cartGoodsCount" />
+                :badge="cartGoodsCount" 
+                @click="$router.push('/cart')"
+            />
             
             <!-- 加入购物车 按钮 -->
             <van-goods-action-button 
