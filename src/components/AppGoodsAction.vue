@@ -11,8 +11,17 @@
                 @click="isCollected=!isCollected"
             />
             <van-goods-action-icon icon="cart-o" text="购物车" badge="15" />
-            <van-goods-action-button type="warning" text="加入购物车" />
-            <van-goods-action-button type="danger" text="立即购买" />
+            
+            <!-- 加入购物车 按钮 -->
+            <van-goods-action-button 
+                type="warning" text="加入购物车" 
+                @click="toAddCart"
+            />
+            <!-- 立即购买 按钮 -->
+            <van-goods-action-button 
+                type="danger" text="立即购买" 
+                @click="toBuyNow"
+            />
         </van-goods-action>
 
     </div>
@@ -24,6 +33,16 @@ export default {
         return {
             // 收藏星星被点击后，选中与否
             isCollected:false
+        }
+    },
+    methods:{
+        // 点击 加入购物车 
+        toAddCart(){
+            this.$emit('toAddCart')
+        },
+        // 点击 立即购买 
+        toBuyNow(){
+            this.$toast('Sorry，该功能尚未开放，请等待更新')
         }
     }
 }

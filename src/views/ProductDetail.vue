@@ -75,7 +75,7 @@
         />
 
         <!-- GoodsAction商品导航 -->
-        <AppGoodsAction></AppGoodsAction>
+        <AppGoodsAction @toAddCart="toAddCart"></AppGoodsAction>
 
     </div>
 </template>
@@ -89,6 +89,7 @@ import Tips from "@/components/Tips.vue"
 import Products from '@/components/Products.vue'
 // 引入 GoodsAction 商品导航
 import AppGoodsAction from "@/components/AppGoodsAction.vue"
+import Vue from 'vue'
 
 
 
@@ -174,6 +175,19 @@ export default {
             // console.log(result.data.data);
             this.relatedGoodsList=result.data.data.goodsList;
         })
+    },
+    methods:{
+        // 点击购物车按钮
+        toAddCart(){
+            //  点击购物车按钮，若sku商品规格弹出层没有展示，则展示sku
+            //  若sku商品规格弹出层已经展示状态，则直接跳转cart购物车页面
+            if(this.isShowSku){
+                //加入购物车
+                Vue.prototype.$toast.success('加入购物车')
+            }else{
+                this.isShowSku=true;
+            }
+        }
     }
 }
 </script>
