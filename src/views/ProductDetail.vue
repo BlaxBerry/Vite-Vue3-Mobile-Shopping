@@ -29,7 +29,10 @@
         </div>
 
         <!-- 弹出层 -->
-        <van-cell title="展示弹出层" is-link />
+        <van-cell title="展示弹出层" 
+            is-link 
+            @click="isShowSku=true"
+        />
 
         <!-- 商品规格参数 -->
         <div class="arrtibute">
@@ -62,6 +65,15 @@
              <Products :searchGoodsList="relatedGoodsList"></Products>
         </div>
 
+        <!-- Sku商品规格 -->
+        <van-sku
+            v-model="isShowSku"
+            :sku="sku"
+            :goods="goods"
+            :quota="quota"
+            :hide-stock="sku.hide_stock"
+        />
+
         <!-- GoodsAction商品导航 -->
         <AppGoodsAction></AppGoodsAction>
 
@@ -79,6 +91,7 @@ import Products from '@/components/Products.vue'
 import AppGoodsAction from "@/components/AppGoodsAction.vue"
 
 
+
 export default {
     data(){
         return {
@@ -93,7 +106,28 @@ export default {
             // 常见问题
             productIssue:'',
             // 相关商品列表（大家都在看）
-            relatedGoodsList:[]
+            relatedGoodsList:[],
+
+            // Sku商品规格弹出层
+            // Sku显示隐藏
+            isShowSku:false,
+            // 商品数据
+            sku: {
+                tree:[],
+                // sku 库存显示隐藏
+                hide_stock: false,
+                // sku 库存
+                stock_num:0,
+                // sku 价格
+                price:0
+            },
+            // 商品信息
+            goods: {
+                // Sku商品缩略图
+                picture:''
+            },
+            // 限购数量
+            quota:5,
         }
     },
     components:{
@@ -111,6 +145,7 @@ export default {
             // 赋值轮播图数组
             this.bannerSwipeGallery = result.data.data.gallery;
             // 商品信息（名称，描述信息，价格）
+            // Info
             this.productInfo = result.data.data.info;
             // 商品规格参数
             this.productAttr = result.data.data.attribute;
@@ -118,6 +153,17 @@ export default {
             this.good_desc = this.productInfo.goods_desc;
             // 常见问题
             this.productIssue = result.data.data.issue;
+
+            // Sku商品规格数据
+            // Sku 商品缩略图
+            this.goods.picture = this.productInfo.list_pic_url;
+            // sku 剩余库存
+            this.sku.stock_num = this.productInfo.goods_number;
+            // sku 价格
+            this.sku.price = (this.productInfo.retail_price).toFixed(2);
+
+           
+
         })
 
         // 发送请求，获得相关产品数据（大家都在看）
@@ -125,7 +171,7 @@ export default {
              // 传入商品id作为请求参数
             id:this.$route.query.id
         }).then(result=>{
-            console.log(result.data.data);
+            // console.log(result.data.data);
             this.relatedGoodsList=result.data.data.goodsList;
         })
     }

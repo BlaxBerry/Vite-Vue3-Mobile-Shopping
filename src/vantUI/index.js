@@ -25,7 +25,8 @@ import {
     Divider,
     GoodsAction,
     GoodsActionIcon,
-    GoodsActionButton
+    GoodsActionButton,
+    Sku
 } from 'vant';
 
 // import 'vant/lib/search/style';
@@ -55,4 +56,5 @@ Vue
     .use(Divider)
     .use(GoodsAction)
     .use(GoodsActionButton)
-    .use(GoodsActionIcon);
+    .use(GoodsActionIcon)
+    .use(Sku);

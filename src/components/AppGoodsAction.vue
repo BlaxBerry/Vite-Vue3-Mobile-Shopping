@@ -30,5 +30,8 @@ export default {
 </script>
 
 <style lang="less" scoped>
-
+// 设置层级盖住Sku组件的弹出页面
+.van-goods-action {
+    z-index: 99999;
+}
 </style>
