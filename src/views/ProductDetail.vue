@@ -62,6 +62,8 @@
              <Products></Products>
         </div> -->
 
+        <!-- GoodsAction商品导航 -->
+        <AppGoodsAction></AppGoodsAction>
 
     </div>
 </template>
@@ -73,6 +75,9 @@ import {GetGoodDetailData} from "@/request/api.js"
 import Tips from "@/components/Tips.vue"
 // 引入商品组件
 // import Products from '@/components/Products.vue'
+// 引入 GoodsAction 商品导航
+import AppGoodsAction from "@/components/AppGoodsAction.vue"
+
 
 export default {
     data(){
@@ -91,6 +96,7 @@ export default {
     },
     components:{
         Tips,
+        AppGoodsAction
         // Products
     },
     created(){

@@ -22,7 +22,10 @@ import {
     Form,
     Field,
     Button,
-    Divider
+    Divider,
+    GoodsAction,
+    GoodsActionIcon,
+    GoodsActionButton
 } from 'vant';
 
 // import 'vant/lib/search/style';
@@ -49,4 +52,7 @@ Vue
     .use(Form)
     .use(Field)
     .use(Button)
-    .use(Divider);
+    .use(Divider)
+    .use(GoodsAction)
+    .use(GoodsActionButton)
+    .use(GoodsActionIcon);
