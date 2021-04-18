@@ -59,3 +59,8 @@ export const AddToCart = (params) => {
 export const GetCartListData = () => {
     return request.get('/cart/index')
 };
+
+// 切换商品选中状态
+export const ChangeCartGoodChecked = (params) => {
+    return request.post('/cart/checked', params)
+};

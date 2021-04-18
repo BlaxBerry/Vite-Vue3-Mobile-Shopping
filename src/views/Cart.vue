@@ -7,12 +7,15 @@
 
         <!-- VantUI checkbox复选框 -->
         <van-checkbox-group v-model="result">
-            <van-checkbox name="a" v-for="item in cartList" :key="item.id">
+            <van-checkbox 
+                :name="item.id" 
+                v-for="item in cartList" :key="item.id"
+                @click="changeChecked(item)"
+                >
                 <!-- VantUI card卡片 -->
                 <van-card
                     :num="item.number"
                     :price="item.retail_price.toFixed(2)"
-                    desc="描述信息"
                     :title="item.goods_name"
                     :thumb="item.list_pic_url"
                 />
@@ -25,7 +28,10 @@
             :price="cartTotal.checkedGoodsAmount * 100" 
             button-text="提交订单" 
             @submit="onSubmit">
-            <van-checkbox v-model="checked">全选</van-checkbox>
+
+            <!-- 全选框 -->
+            <van-checkbox v-model="checkedAll">全选</van-checkbox>
+
             <template #tip>
                 共计 
                 <span class="totalNum">{{cartTotal.checkedGoodsCount}}</span> 
@@ -47,14 +53,20 @@
 // 引入 Tips小提示组件
 import Tips from "@/components/Tips.vue"
 // 引入请求接口api
-import { GetCartListData } from '@/request/api.js'
+import { 
+    GetCartListData, 
+    ChangeCartGoodChecked
+} from '@/request/api.js'
 
 
 export default {
     data(){
         return {
+            // 商品复选框
+            // 数组元素是选中的商品（checked=1）
             result:[],
-            checked:true,
+            // 底部提交表单全选框
+            // checkedAll:true,
             // 购物车商品列表
             cartList:[],
             // 购物车总计数据
@@ -65,15 +77,80 @@ export default {
         Tips
     },
     created(){
+        // 发送修改数据的请求
         GetCartListData().then(result=>{
-            console.log(result.data.data);
-            this.cartList = result.data.data.cartList;
-            this.cartTotal = result.data.data.cartTotal;
+            // 拿到返回的修改后的新数据，并渲染页面
+           this.totalFn(result.data)
         })
+    },
+    computed:{
+        // 全选和全不选
+        checkedAll:{
+             get(){
+                // 复选框 ———> 全选框
+                //    方法一：
+                // return  this.cartTotal.checkedGoodsCount == this.cartTotal.goodsCount
+                //    方法二：
+                 return  this.result.length == this.cartList.length
+             },
+             set(val){
+                //  val是要修改成的新的值
+                // console.log(val);
+                // 发送给后端
+                let ids = [];
+                this.cartList.map(item=>{
+                    ids.push(item.product_id)
+                })
+                ChangeCartGoodChecked({
+                    // 选中状态
+                    isChecked:val?1:0,
+                    //商品id
+                    productIds:ids.join()
+                    
+                }).then(result=>{
+                        // console.log(result.data.data);
+                        // 修改发送后，拿到返回新的数据再重新渲染页面
+                        this.totalFn(result.data)
+                    })
+             }
+        }
     },
     methods:{
         onSubmit(){},
-        onClickEditCount(){}
+        onClickEditCount(){},
+
+        // 切换商品选中状态
+        changeChecked(item){
+            // 告诉后端那些值被改变，后端接受后响应会处理过后的新数据
+            ChangeCartGoodChecked({
+                // 选中状态
+                isChecked:item.checked==0?1:0,
+                //商品id
+                productIds:item.product_id
+                
+            }).then(result=>{
+                console.log(result.data.data);
+                // 修改发送后，拿到返回新的数据再重新渲染页面
+                this.totalFn(result.data)
+            })
+        },
+
+        totalFn(data){
+            console.log(data.data);
+            this.cartList = data.data.cartList;
+            this.cartTotal = data.data.cartTotal;
+
+            // 遍历，检查checked =1 的商品
+            // 放入result数组中，使复选框显示
+            this.result=[] //防止数组越来越长
+            this.cartList.map(item=>{
+                if(item.checked == 1){
+                     this.result.push(item.id)
+                }else{
+                    return
+                }
+            })
+        }
     }
 }
 </script>
@@ -95,6 +172,10 @@ export default {
         
             .van-card {
                 text-align: left;
+                .van-card__title {
+                    // font-size: 0.18rem;
+                    line-height: 0.4rem;
+                }
             }
         }
     }
