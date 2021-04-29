@@ -206,19 +206,21 @@ export default {
                 // 1.获取添加的商品数量
                 // VantUI提供的方法
                 // this.$refs.sku.getSkuData().selectedNum;
+                console.log(this.productInfo.id);
+                console.log(this.productInfo.id.toString());
+                console.log(this.$route.query.id);
                 console.log(this.$refs.sku.getSkuData().selectedNum);
                 console.log(this.productList[0].id);
-                console.log(this.productInfo.id);
 
                 // 2.发送请求 加入购物车
-                AddToCart({
-                    goodsId:21700,
-                    // goodsId:"1135058",
-                    // goodsId:this.$route.query.id,
-                    // goodsId:this.productInfo.id,
-                    productID:this.productList[0].id,
-                    number:this.$refs.sku.getSkuData().selectedNum
-                }).then(result=>{
+                AddToCart(
+                    {
+                        goodsId: this.$route.query.id,
+                        productId: this.productList[0].id,
+                        number:this.$refs.sku.getSkuData().selectedNum
+                    }
+                // {goodsId: "1116011", productId: 167, number: 1}
+                ).then(result=>{
                     if(result.data.errno == 0){
                         console.log(result.data);
                         this.$toast.success("成功添加到购物车")
@@ -227,38 +229,13 @@ export default {
                         this.$toast('Sorry，无法添加商品，' + result.data.errmsg)
                     }
                 })
-                // this.addCart({
-                //     // 商品ID
-                //     goodsId:this.productList[0].goods_id,
-                //     //产品ID
-                //     productID:this.productList[0].id,
-                //     //数量
-                //     number:this.$refs.sku.getSkuData().selectedNum
-                // });
 
-
-
-
-                // “/cart/add” 接口损坏
-                // Vue.prototype.$toast('Sorry，服务器接口错误，无法添加数据到购物车');
-
-                //  3.跳转到购物车页面
-                // this.$router.push('/cart');
 
             }else{
                 this.isShowSku=true;
             }
         },
-        // 发送请求 加入购物车
-        // addCart(params){
-        //     AddToCart(params).then((result)=>{
-        //         console.log(result);
-        //         // 更新GoodsAction购物车商品数量
-        //         // this.cartGoodsCount=result.data.data.cartTotal.goodsCount;
-        //         //  跳转到购物车页面
-        //         this.$router.push('/cart');
-        //     })
-        // }
+
     }
 }
 </script>

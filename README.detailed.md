@@ -1490,6 +1490,341 @@ http://kumanxuan1.f3322.net:8001/goods/list
 
 
 
+## 十五、TabBar导航标签栏
+
+也是个组件，单独写在`components / TabBar.vue`
+
+然后再**在项目目录下的`App.vue`引入TabBar组件**
+
+因为是根据TabBar的选项标签跳转指定页面，所以需要分别设置路由地址和页面组件
+
+### 结构
+
+```vue
+<template>
+       <!-- Tabbar -->
+        <van-tabbar v-model="active">
+            <van-tabbar-item icon="home-o" to="/home">首页</van-tabbar-item>
+            <van-tabbar-item icon="label-o" to="/special">专题</van-tabbar-item>
+            <van-tabbar-item icon="apps-o" to="/category">分类</van-tabbar-item>
+            <van-tabbar-item icon="cart-o" to="/cart">购物车</van-tabbar-item>
+            <van-tabbar-item icon="user-o" to="user">我的</van-tabbar-item>
+        </van-tabbar>
+</template>
+```
+
+
+
+### 路由
+
+在`router / index.js`中设置各个选项对应的页面地址
+
+五个路由地址和主页home是同级关系
+
+```js
+{
+        // 主页
+        path: '/home',
+        name: 'Home',
+        component: Home,
+        children: [
+            {
+            	//搜素弹出层，home子路由
+                path: '/home/searchPopup',
+                name: 'SearchPopup',
+                component: () =>
+                    import ( /* webpackChunkName: "SearchPopup" */ '../views/SearchPopup.vue')
+            }
+        ]
+    },
+    // TabBar 选项栏
+    {
+        //tabbar Special专题选项
+        path: '/special',
+        name: 'Special',
+        component: () =>
+            import ( /* webpackChunkName: "Topic */ '../views/Special.vue')
+    },
+    {
+        // tabbar 分类选项
+        path: '/category',
+        name: 'Category',
+        component: () =>
+            import ( /* webpackChunkName: "Category */ '../views/Category.vue')
+    },
+    {
+        // tabbar 购物车选项
+        path: '/cart',
+        name: 'Cart',
+        component: () =>
+            import ( /* webpackChunkName: "Cart */ '../views/Cart.vue')
+    },
+    {
+        // tabbar 我的选项
+        path: '/user',
+        name: 'User',
+        component: () =>
+            import ( /* webpackChunkName: "User */ '../views/User.vue')
+    }
+```
+
+
+
+### 跳转页面
+
+然后在 `view ` 中建立相对应的页面
+
+```js
+Project
+|--components
+		|--TabBar.vue   // 组件内容
+|--router
+		|-index.js      // 对应的路由
+|--view							// 页面
+		|--Home.vue
+		|--Special.vue
+		|--Category.vue
+		|--Cart.vue
+		|--User.vue
+|--App.vue					// 导入
+
+```
+
+
+
+### 点击样式和路由
+
+VantUI的Tabbar中选中项的样式是通过`v-model = active`中的变量active控制
+
+active是number类型。默认是0，
+
+所以会导致页面每次刷新后，无论路由地址是哪个都是第一个项目被选中
+
+所以需要把active和选项的路由中的属性绑定
+
+给各个选项对应的路由中的meta属性中设定不同的number
+
+```js
+ {
+        //tabbar Special专题选项
+        path: '/special',
+        name: 'Special',
+        meta: {
+            TabBarActiveNumber: 1
+        },
+        component: () =>
+            import ( /* webpackChunkName: "Topic */ '../views/Special.vue')
+    },
+    {
+        // tabbar 分类选项
+        path: '/category',
+        name: 'Category',
+        meta: {
+            TabBarActiveNumber: 2
+        },
+        component: () =>
+            import ( /* webpackChunkName: "Category */ '../views/Category.vue')
+    },
+      
+  
+```
+
+再通过computed计算属性，将active的值修改为对应的路由的meta中的自定义属性的值
+
+即可实现页面刷新后选中项目的样式不会跑错
+
+```vue
+<script>
+export default {
+    data() {
+        return {
+            // 选中的标签
+            // 应该是等同与相应的路由
+            // active: 0,
+        };
+    },
+    mounted(){
+        // console.log(this.$route.path);
+        // console.log(this.$route.meta.TabBarActiveNumber);
+    },
+    computed:{
+        active:{
+            get(){
+                return this.$route.meta.TabBarActiveNumber
+            },
+            set(){}
+            
+        }
+    }
+};
+</script>
+```
+
+
+
+
+
+## 十六、POST登陆请求
+
+### 数据接口
+
+```js
+//接口地址
+http://kumanxuan1.f3322.net:8001/auth/loginByWeb
+```
+
+该接口用户信息例子：  
+
+> username：**默认用户** ，pwd：**111111**
+>
+> username：**日**，pwd：**111111**     
+
+
+
+### 设置接口
+
+`request / api.js`中设定请求接口：
+
+```js
+//登陆请求
+export const GoLogin = (params) => {
+    return request.post('/auth/loginByWeb', params)
+};
+```
+
+
+
+### 请求数据与渲染页面
+
+给指定DOM元素上绑定事件，在事件中调用接口的请求函数：
+
+```js
+GoLogin({
+  username:values["用户名"],
+  pwd:values["密码"]
+})
+.then((result)=>{
+                // console.log(result.data);
+  
+                if(result.data.errno == 0){
+                    // 1.示登陆成功
+                    Vue.prototype.$toast.success("登陆成功")
+
+                    // 2.保存token到本地
+                    localStorage.setItem("token",result.data.data.token);
+                    localStorage.setItem("userInfo",JSON.stringify(result.data.data.userInfo))
+                    
+                    setTimeout(()=>{
+
+                        // 3.遮罩层隐藏
+                        this.overlayShow=!this.overlayShow;
+                        // 4.将数据渲染到页面
+                        this.nickname = result.data.data.userInfo.username;
+                        this.avatarSrc = result.data.data.userInfo.avatar;                   
+                    },1000)
+
+                }else{
+                     // 提示登陆失败
+                     Vue.prototype.$toast("登陆失败 " + result.data.errmsg)
+                    // 遮罩层隐藏
+                      setTimeout(()=>{
+                         this.overlayShow=!this.overlayShow;
+                    },1000)
+                }
+            })
+
+
+        },
+```
+
+
+
+### LocalStorage本地存储
+
+将获得的数据存入localStorage
+
+因为不存入本地存储的话，只有在触发事件中的POST数据请求函数后，才会获得数据然后渲染页面，
+
+所以一旦页面刷新页面就会因为没有触发事件和请求函数，导致页面无法渲染
+
+可以通过将请求获得的数据存入本地存储
+
+然后在生命周期钩子函数created中，判断本地存储中是否有请求来的数据
+
+如果有就将数据渲染到页面，没有就return
+
+```js
+created(){
+        // 判断用户是否已经登陆
+        // 判断localStorage中是否存有POST登陆请求获得的token
+        let token = localStorage.getItem('token')
+        if(token){
+            // 用户已经是登陆状态了
+            // 渲染页面
+            let localStorageUserInfo = localStorage.getItem('userInfo')
+            this.nickname = JSON.parse(localStorageUserInfo).username;
+            this.avatarSrc = JSON.parse(localStorageUserInfo).avatar;
+        }
+        
+    }
+```
+
+
+
+
+
+## 十七、商品详情页
+
+详情页组件并不是个放在单个页面中的小组件，是一整个页面，
+
+所以应该放在项目目录下的`views / ProductDetail.vue  `
+
+
+
+### 跳转路由
+
+通过事件给DOM元素添加跳转的路由`this.$router.push('/productDetail')`
+
+```js
+   methods:{
+        // 跳转到商品详情页
+        toProductDetail(){
+            this.$router.push('/productDetail')
+        }
+    }
+```
+
+
+
+### 设置路由
+
+`router / index.js`中添加上一条路由
+
+```js
+  {
+        path: '/productDetail',
+        name: 'User',
+        component: () =>
+            import ( /* webpackChunkName: "User */ '../views/ProductDetail.vue')
+    }
+```
+
+
+
+### 设置请求接口
+
+```js
+
+```
+
+
+
+### 请求数据
+
+传输商品id
+
+
+
 
 
 ## 重复点击同一个路由报错的bug
@@ -1516,6 +1851,49 @@ http://kumanxuan1.f3322.net:8001/goods/list
    ```
 
 
+
+
+
+
+
+## 路由守卫
+
+(路由拦截)
+
+```js
+Vue.use(VueRouter);
+
+const routes = [
+  {
+    path:'/XXX',
+    name:'',
+    meta:{},
+    component:()=>import('../views/XXX.vue')
+  },{},{}()
+];
+
+const router = new VueRouter({
+  mode:"history",
+  base:process.env.BASE_URL,
+  routes
+});
+
+router.beforeEach((to,from,next)=>{
+    console.log(to);  // 跳转到哪个路由
+    console.log(from); // 从哪个路由跳转过来
+    next(); // 放行
+})
+
+exports default router
+```
+
+
+
+`next()`不调用就无法跳转路由
+
+```js
+
+```
 
 
 
