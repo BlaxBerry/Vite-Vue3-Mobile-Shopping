@@ -24,7 +24,7 @@ const routes = [{
                 path: '/home/searchPopup',
                 name: 'SearchPopup',
                 component: () =>
-                    import ( /* webpackChunkName: "SearchPopup" */ '../views/SearchPopup.vue')
+                    import ('../views/SearchPopup.vue')
             }
         ]
     },
@@ -37,7 +37,7 @@ const routes = [{
             isShowTabBar: true
         },
         component: () =>
-            import ( /* webpackChunkName: "Topic */ '../views/Special.vue')
+            import ('../views/Special.vue')
     },
     {
         // tabbar 分类选项
@@ -48,7 +48,7 @@ const routes = [{
             isShowTabBar: true
         },
         component: () =>
-            import ( /* webpackChunkName: "Category */ '../views/Category.vue')
+            import ('../views/Category.vue')
     },
     {
         // tabbar 购物车选项
@@ -59,7 +59,7 @@ const routes = [{
             isShowTabBar: true
         },
         component: () =>
-            import ( /* webpackChunkName: "Cart */ '../views/Cart.vue')
+            import ('../views/Cart.vue')
     },
     {
         // tabbar 我的选项
@@ -70,14 +70,14 @@ const routes = [{
             isShowTabBar: true
         },
         component: () =>
-            import ( /* webpackChunkName: "User */ '../views/User.vue')
+            import ('../views/User.vue')
     },
     // 商品详情页
     {
         path: '/productDetail',
         name: 'ProductDetail',
         component: () =>
-            import ( /* webpackChunkName: "User */ '../views/ProductDetail.vue')
+            import ('../views/ProductDetail.vue')
     }
     // {
     //   path: '/about',

@@ -2,9 +2,6 @@
     <div>
         <!-- cart 购物车  -->
         
-        <!-- Tips小提示组件 -->
-        <Tips></Tips>
-
         <!-- VantUI checkbox复选框 -->
         <van-checkbox-group v-model="result" :disabled="isShowStepper">
             <van-checkbox 
@@ -69,8 +66,6 @@
 </template>
 
 <script>
-// 引入 Tips小提示组件
-import Tips from "@/components/Tips.vue"
 // 引入请求接口api
 import { 
     GetCartListData, 
@@ -99,7 +94,7 @@ export default {
         }
     },
     components:{
-        Tips
+
     },
     created(){
         // 发送修改数据的请求
