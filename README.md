@@ -1,6 +1,6 @@
 # vue_shopping
-
-## Project setup
+![](./public/images/Home.png)
+### Project setup
 ```
 npm install
 ```
@@ -10,16 +10,34 @@ npm install
 npm run serve
 ```
 
-### Compiles and minifies for production
+### App running at
 ```
-npm run build
+http://localhost:3000
 ```
+### Login
+test测试账户：
 
-### Lints and fixes files
-```
-npm run lint
-```
+userName：默认用户
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+password：111111
 
+![](./public/images/SignOut.png)
+
+---
+### Search and Sort
+![](./public/images/Search&Sort.png)
+
+---
+### Detail
+![](./public/images/Detail.png)
+
+![](./public/images/Detail2.png)
+
+---
+### Add to Cart
+![](./public/images/AddToCart.png)
+
+---
+
+### Edit Cart
+![](./public/images/CartEdit.png)
