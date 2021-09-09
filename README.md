@@ -10,3 +10,8 @@ rewrite the project from Vue-Cli/Webpack to Vite
 - Less
 - Rem Unit
 - Axios
+
+---
+
+### Images
+![](./public/images/Home.png)

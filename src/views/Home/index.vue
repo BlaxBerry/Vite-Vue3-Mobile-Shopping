@@ -1,26 +1,42 @@
 <template>
+  <!-- search bar -->
   <van-search
     v-model="searchVal"
     disabled
-    background="#fff"
+    background="white"
     placeholder="Search Goods"
   />
-  <div>
-    <van-button type="primary">主要按钮</van-button>
-    <van-button type="success">成功按钮</van-button>
-    <van-button type="default">默认按钮</van-button>
-    <van-button type="warning">警告按钮</van-button>
-    <van-button type="danger">危险按钮</van-button>
-  </div>
+
+  <!-- 1. banner swiper -->
+  <Swiper :list="Lists.banner" />
+
+  <!-- 2. channel icon -->
+  <ChannelIcons :list="Lists.channel" />
+
+  <!-- 3. brand list -->
+  <Brands :list="Lists.brandList"/>
 </template>
 
 <script>
+// hooks
+import useHomeDetailList from "../../hooks/useHomeDetailsList";
+// components
+import Swiper from "./HomeSwiper.vue";
+import ChannelIcons from "./HomeChannels.vue";
+import Brands from "./HomeBrands.vue";
+
 export default {
+  components: { Swiper, ChannelIcons, Brands },
+
   setup() {
     const searchVal = "";
 
+    // get and use Home Details Lists
+    const { Lists } = useHomeDetailList();
+
     return {
       searchVal,
+      Lists,
     };
   },
 };
