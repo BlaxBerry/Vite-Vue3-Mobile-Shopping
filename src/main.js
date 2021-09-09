@@ -1,21 +1,24 @@
-import Vue from 'vue'
+import { createApp } from 'vue'
 import App from './App.vue'
-import router from './router'
-import store from './store'
-// 引入 vantUI from @/vantUI/index.js
-import "@/vantUI";
-// 引入 reset-css 清除css样式
-import 'reset-css'
+const app = createApp(App)
 
-// 全局过滤器 商品价格
-Vue.filter('RMBformat', val => {
-    return "¥ " + Number(val).toFixed(2) + " RMB";
-})
+// router
+import router from './router/index'
+app.use(router)
 
-Vue.config.productionTip = false
+// Desktop Until
+import '@vant/touch-emulator';
 
-new Vue({
-    router,
-    store,
-    render: h => h(App)
-}).$mount('#app')
+// Rem Until
+import 'amfe-flexible'
+
+// style
+import 'rest-css'
+import './styles/index.less'
+
+// Vant
+import { Button, Search } from 'vant';
+app.use(Button).use(Search)
+
+
+app.mount('#app')
