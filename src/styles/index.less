@@ -1,15 +1,25 @@
+@import "./common.less";
+
 html {
-  font-size: 14px;
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-size: @htmlFontSize;
+  font-family: @htmlfontfamily;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  background-color: #efefef;
+  background-color: @backgroundColor;
 }
 
 img {
   display: block;
   width: 100%;
+}
+
+.popup {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  background-color: @backgroundColor;
 }

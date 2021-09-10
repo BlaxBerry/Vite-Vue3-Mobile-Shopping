@@ -1,41 +1,37 @@
 <template>
-  <!-- search bar -->
-  <van-search
-    v-model="searchVal"
-    disabled
-    background="white"
-    placeholder="Search Goods"
-  />
+  <!-- 1. search bar -->
+  <SearchBar />
 
-  <!-- 1. banner swiper -->
+  <!-- 2. banner swiper -->
   <Swiper :list="Lists.banner" />
 
-  <!-- 2. channel icon -->
+  <!-- 3. channel icon -->
   <ChannelIcons :list="Lists.channel" />
 
-  <!-- 3. brand list -->
-  <Brands :list="Lists.brandList"/>
+  <!-- 4. brand list -->
+  <Brands :list="Lists.brandList" />
+
+  <!-- show popup -->
+  <router-view></router-view>
 </template>
 
 <script>
 // hooks
 import useHomeDetailList from "../../hooks/useHomeDetailsList";
 // components
+import SearchBar from "./HomeSearchBar.vue";
 import Swiper from "./HomeSwiper.vue";
 import ChannelIcons from "./HomeChannels.vue";
 import Brands from "./HomeBrands.vue";
 
 export default {
-  components: { Swiper, ChannelIcons, Brands },
+  components: { SearchBar, Swiper, ChannelIcons, Brands },
 
   setup() {
-    const searchVal = "";
-
     // get and use Home Details Lists
     const { Lists } = useHomeDetailList();
 
     return {
-      searchVal,
       Lists,
     };
   },
