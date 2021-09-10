@@ -17,7 +17,19 @@ import 'rest-css'
 import './styles/index.less'
 
 // Vant
-import { Button, Search, Swipe, SwipeItem, Grid, GridItem, Col, Row, Image as VanImage, } from 'vant';
+import {
+    Button,
+    Search,
+    Swipe,
+    SwipeItem,
+    Grid,
+    GridItem,
+    Col,
+    Row,
+    Image as VanImage,
+    Icon,
+    Tag
+} from 'vant';
 app.use(Button)
     .use(Search)
     .use(Swipe)
@@ -27,6 +39,8 @@ app.use(Button)
     .use(Col)
     .use(Row)
     .use(VanImage)
+    .use(Icon)
+    .use(Tag)
 
 
 app.mount('#app')

@@ -4,11 +4,10 @@
       <!-- 1. search bar -->
       <SearchBar />
 
-      <!-- 2. search history -->
-      <History />
+      <!-- 2. search history + hot recommend-->
+      <History :keywordsList="keywordsList" />
 
-      <!-- 3. hot recommend -->
-      <Hot />
+      <!-- 3.  -->
     </div>
   </transition>
 </template>
@@ -17,18 +16,23 @@
 import { ref } from "vue";
 // components
 import SearchBar from "./PopupSearchBar.vue";
-import History from "./PopupSearchHistory.vue";
-import Hot from "./PopupSearchHot.vue";
+import History from "./PopupHistory.vue";
+// hooks
+import usePopupSearchKeywords from "../../hooks/usePopupSearchKeywords";
 
 export default {
-  components: { SearchBar, History, Hot },
+  components: { SearchBar, History },
 
   setup() {
     // popup route show/hide
     let popupShow = ref(true);
 
+    // use popup search history keywords
+    let { keywordsList } = usePopupSearchKeywords();
+
     return {
       popupShow,
+      keywordsList,
     };
   },
 };

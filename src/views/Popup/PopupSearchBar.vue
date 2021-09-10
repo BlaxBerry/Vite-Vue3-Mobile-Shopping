@@ -18,7 +18,7 @@ import { useRouter } from "vue-router";
 
 export default {
   setup() {
-    // search
+    // search bar
     let searchVal = ref("s");
     let onSearch = () => {};
 
