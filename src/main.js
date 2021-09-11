@@ -4,7 +4,11 @@ const app = createApp(App)
 
 // router
 import router from './router/index'
-app.use(router)
+
+// vuex
+import store from './store'
+
+app.use(router).use(store)
 
 // Desktop Until
 import '@vant/touch-emulator';

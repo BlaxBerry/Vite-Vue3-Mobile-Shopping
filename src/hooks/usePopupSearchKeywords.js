@@ -1,5 +1,5 @@
 // api
-import { GetPopupKeyWords } from "../api/index";
+import GetPopupKeyWords from "../api/popup/getPopupSearchKeywords";
 import { reactive } from "vue";
 
 export default function usePopupSearchKeywords() {

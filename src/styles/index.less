@@ -16,6 +16,39 @@ img {
   width: 100%;
 }
 
+// home
+// home block
+.home-block {
+  padding: 0.1rem 0 0.5rem;
+  background-color: #fff;
+  .title {
+    text-align: center;
+    padding: 0.4rem 0;
+  }
+  .home-brand {
+    .van-col {
+      position: relative;
+      overflow: hidden;
+      p {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 100%;
+        padding: 0.2rem 0;
+        padding-right: @cardPriceFontSize;
+        background-color: rgba(0, 0, 0, 0.5);
+        font-size: @cardPriceFontSize;
+        font-weight: 700;
+        text-align: right;
+        color: #fff;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
+  }
+}
+
 // popup route
 .popup {
   width: 100%;
@@ -49,16 +82,17 @@ img {
 
 // cards
 .card-list {
-  padding: 2% 1%;
+  padding: 2% 2%;
   background-color: #fff;
   .card {
-    padding: 0 1%;
+    padding: 1%;
     text-align: center;
     .card-title {
+      padding: 0 @cardPriceFontSize;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
-      font-size: @cardPriceFontSize * 1.3;
+      font-size: @cardPriceFontSize;
     }
     .price {
       padding: 0.1rem;

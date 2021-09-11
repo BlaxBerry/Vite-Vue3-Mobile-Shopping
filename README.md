@@ -1,15 +1,54 @@
 ## Vite-Vue3-Mobile-Shopping
+SPA Mobile EC shopping web application.
 
-rewrite the project from Vue-Cli/Webpack to Vite
+- rewrote from:
+    **Vue2 + Vue-Cli** + Webpack 
+- to: 
+    **Vue3 + Vite**
 
 
 ### Tech Stacks
-- Vite
+- Vite2
 - Vue3
-- Vant UI
+- VueX4
+- Vue-Router
+- Vant ( UI Components )
 - Less
-- Rem Unit
+- (Rem Unit)
+    - postcss
+    - amfe-flexible
 - Axios
+
+### Directory Detail
+```js
+|- api
+    |- home
+    |- popup
+    ...
+|- components
+    |- Cards
+    |- Empty
+    |- MenuBar
+    ...
+|- hooks
+    |- useHomeListDetail.js
+    |- usePopupKeywordsDetail.js
+    ...
+|- utils
+    |- request.js // network request
+    |- filters
+    ...
+|- views
+    |- Home
+    |- Popup // search popup
+        |- SearchKetwords
+        |- SearchResult
+    | -Detail
+    ...
+|- App.vue
+|- main.js
+...
+```
 
 ---
 
