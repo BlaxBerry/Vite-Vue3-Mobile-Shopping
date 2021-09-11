@@ -20,7 +20,9 @@ import { useStore } from "vuex";
 import usePopupSearchResult from "../../hooks/usePopupSearchResult";
 
 export default {
-  setup() {
+  emits: ["onGetInputVal"],
+
+  setup(props, context) {
     const router = useRouter();
     const store = useStore();
 
@@ -28,13 +30,12 @@ export default {
     let searchVal = ref("");
     let searchResult = reactive({});
     let onSearch = async () => {
-      // 1. go to result route
-      router.push("/home/search-result");
-      
-      // 2. use Popup search result hook
-      searchResult = await usePopupSearchResult(searchVal.value);
-      // 3. share the result as a common state by Vuex
-      store.commit('getSearchResult', searchResult)
+      // 1. use Popup search result hook
+      searchResult = await usePopupSearchResult(searchVal.value.trim());
+      // 2. share the result as a common state by Vuex
+      store.commit("getSearchResult", searchResult);
+      // 3. keywords and result show/hide according to SearchBar's value
+      context.emit("onGetInputVal", searchVal.value);
     };
 
     // close popup back to the prev route

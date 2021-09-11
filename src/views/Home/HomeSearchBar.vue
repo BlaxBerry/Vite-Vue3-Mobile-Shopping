@@ -15,7 +15,7 @@ export default {
     // go to popup route
     const router = useRouter();
     const goPopup = () => {
-      router.push("/home/search-history");
+      router.push("/home/search");
     };
 
     return { goPopup };

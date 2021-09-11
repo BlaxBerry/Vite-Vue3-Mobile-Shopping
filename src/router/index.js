@@ -10,18 +10,12 @@ const routes = [
         name: 'Home',
         component: () => import('../views/Home/index.vue'),
         children: [
-            // propup search history keywords
+            // popup
             {
-                path: '/home/search-history',
-                name: 'SearchHistory',
-                component: () => import('../views/Popup/History/index.vue'),
+                path: '/home/search',
+                name: 'Search',
+                component: () => import('../views/Popup/index.vue'),
             },
-             // propup search result list
-            {
-                path: '/home/search-result',
-                name: 'SearchResultList',
-                component: () => import('../views/Popup/Result/index.vue'),
-            }
         ]
     },
 
