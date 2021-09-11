@@ -30,6 +30,7 @@ export default {
     let onSearch = async () => {
       // 1. go to result route
       router.push("/home/search-result");
+      
       // 2. use Popup search result hook
       searchResult = await usePopupSearchResult(searchVal.value);
       // 3. share the result as a common state by Vuex

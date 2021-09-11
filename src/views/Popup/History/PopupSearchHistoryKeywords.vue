@@ -46,15 +46,23 @@
 </template>
 
 <script>
+import { reactive } from "@vue/reactivity";
 import { useRouter } from "vue-router";
+import { useStore } from "vuex";
+// hooks
+// import usePopupSearchResult from "../../../hooks/usePopupSearchResult";
 
 export default {
   props: ["keywordsList"],
 
   setup(props) {
-    // go to search result list route
     const router = useRouter();
+    const store = useStore();
+    let searchResult = reactive({});
+    // click tags
     const goPopupResList = (item) => {
+      console.log(item);
+      // 1. go to result route
       router.push("/home/search-result");
     };
 
