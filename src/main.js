@@ -28,7 +28,10 @@ import {
     Row,
     Image as VanImage,
     Icon,
-    Tag
+    Tag,
+    DropdownMenu,
+    DropdownItem,
+    Empty
 } from 'vant';
 app.use(Button)
     .use(Search)
@@ -41,6 +44,9 @@ app.use(Button)
     .use(VanImage)
     .use(Icon)
     .use(Tag)
+    .use(DropdownMenu)
+    .use(DropdownItem)
+    .use(Empty)
 
 
 app.mount('#app')

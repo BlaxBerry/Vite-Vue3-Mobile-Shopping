@@ -7,7 +7,7 @@
     @search="onSearch"
   >
     <template #action>
-      <div @click="onCancel">Search</div>
+      <div @click="onCancel">Cancel</div>
     </template>
   </van-search>
 </template>

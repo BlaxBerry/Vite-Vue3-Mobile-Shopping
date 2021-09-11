@@ -1,5 +1,5 @@
 <template>
-  
+  <van-empty image="search" description="Sorry~ Found Nothing~" />
 </template>
 
 <script>
