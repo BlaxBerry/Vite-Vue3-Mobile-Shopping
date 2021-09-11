@@ -5,6 +5,7 @@ const routes = [
         path: '/',
         redirect: '/home'
     },
+    // home
     {
         path: '/home',
         name: 'Home',
@@ -17,6 +18,30 @@ const routes = [
                 component: () => import('../views/Popup/index.vue'),
             },
         ]
+    },
+    // categray
+    {
+        path: '/categray',
+        name: 'Categray',
+        component: () => import('../views/Categray/index.vue'),
+    },
+    // product detail
+    {
+        path: '/detail',
+        name: 'Detail',
+        component: () => import('../views/Detail/index.vue'),
+    },
+    // cart
+    {
+        path: '/cart',
+        name: 'Cart',
+        component: () => import('../views/Cart/index.vue'),
+    },
+    // user
+    {
+        path: '/user',
+        name: 'User',
+        component: () => import('../views/User/index.vue'),
     },
 
 ]

@@ -5,11 +5,7 @@
       <SearchBar @onGetInputVal="toggleKeywordsOrResult" />
 
       <!-- 2. propup search history keywords -->
-      <Keywords
-        v-if="isShowKeywords"
-        :list="keywordsList"
-        @onShowResult="showResult"
-      />
+      <Keywords v-if="isShowKeywords" @onShowResult="showResult" />
 
       <!-- 3. propup search result list -->
       <ResultList v-if="!isShowKeywords" />
@@ -23,8 +19,6 @@ import { ref } from "vue";
 import SearchBar from "./PopupSearchBar.vue";
 import Keywords from "./PopupHistoryKeywords.vue";
 import ResultList from "./PopupResultList.vue";
-// hooks
-import usePopupSearchKeywords from "../../hooks/usePopupSearchKeywords";
 
 export default {
   components: { SearchBar, Keywords, ResultList },
@@ -44,15 +38,11 @@ export default {
       isShowKeywords.value = value;
     };
 
-    // use popup search history keywords
-    let { keywordsList } = usePopupSearchKeywords();
-
     return {
       isPopupShow,
       isShowKeywords,
       toggleKeywordsOrResult,
       showResult,
-      keywordsList,
     };
   },
 };

@@ -35,7 +35,8 @@ import {
     Tag,
     DropdownMenu,
     DropdownItem,
-    Empty
+    Empty,
+    Lazyload,
 } from 'vant';
 app.use(Button)
     .use(Search)
@@ -51,6 +52,7 @@ app.use(Button)
     .use(DropdownMenu)
     .use(DropdownItem)
     .use(Empty)
+    .use(Lazyload)
 
 
 app.mount('#app')

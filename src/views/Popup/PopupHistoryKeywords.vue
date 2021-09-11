@@ -2,6 +2,7 @@
   <div
     v-for="(listItem, listName) in list"
     :key="listItem"
+    v-show="listItem.length != 0"
     class="popup-keywords"
   >
     <div class="title">
@@ -14,7 +15,7 @@
       </h4>
       <van-icon
         name="delete-o"
-        @click="list.historyList = []"
+        @click="clear"
         v-if="listName == 'historyList'"
       />
     </div>
@@ -46,18 +47,26 @@
 <script>
 import { reactive } from "@vue/reactivity";
 import { useStore } from "vuex";
+import { Toast } from "vant";
 // hooks
+import usePopupSearchKeywords from "../../hooks/usePopupSearchKeywords";
 import usePopupSearchResult from "../../hooks/usePopupSearchResult";
+// api
+import ClearHistory from "../../api/popup/clearPopupSearchHistory";
 
 export default {
-  props: ["list"],
   emits: ["onShowResult"],
 
   setup(props, context) {
     const store = useStore();
-    let searchResult = reactive({});
+
+    // use popup search history keywords
+    let list = reactive([]);
+    let { keywordsList } = usePopupSearchKeywords();
+    list = keywordsList;
 
     // click tags
+    let searchResult = reactive({});
     const goPopupResList = async (item) => {
       // 1. use Popup search result hook
       searchResult = await usePopupSearchResult(item);
@@ -67,8 +76,19 @@ export default {
       context.emit("onShowResult", false);
     };
 
+    // clear history
+    const clear = () => {
+      ClearHistory().then(() => {
+        let { keywordsList } = usePopupSearchKeywords();
+        list.historyList = keywordsList.historyList;
+        Toast.success("成功删除");
+      });
+    };
+
     return {
+      list,
       goPopupResList,
+      clear,
     };
   },
 };

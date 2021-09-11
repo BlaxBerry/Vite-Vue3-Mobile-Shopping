@@ -66,19 +66,25 @@ img {
       justify-content: space-between;
       align-items: center;
     }
-    .tags span {
-      margin: 0 0.1rem;
+    .tags {
+      padding: 0.2rem 0;
+      span {
+        margin: 0.15rem;
+        padding: 0.15rem;
+        font-size: @cardPriceFontSize;
+      }
     }
   }
 }
 
 // cards
 .card-list {
-  padding: 2% 2%;
-  background-color: #fff;
+  padding: 1%;
   .card {
-    padding: 1%;
+    padding: 1% 0;
+    margin: 0.2rem;
     text-align: center;
+    background-color: #fff;
     .card-title {
       padding: 0 @cardPriceFontSize;
       overflow: hidden;

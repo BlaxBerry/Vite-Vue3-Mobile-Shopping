@@ -32,7 +32,8 @@ export default {
     let onSearch = async () => {
       // 1. use Popup search result hook
       searchResult = await usePopupSearchResult(searchVal.value.trim());
-      // 2. share the result as a common state by Vuex
+      // 2. share the inputVal and result as common state by Vuex
+      store.commit("getSearchValue", searchVal.value);
       store.commit("getSearchResult", searchResult);
       // 3. keywords and result show/hide according to SearchBar's value
       context.emit("onGetInputVal", searchVal.value);
