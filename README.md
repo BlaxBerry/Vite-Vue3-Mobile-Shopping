@@ -42,7 +42,7 @@ SPA Mobile EC shopping web application.
 |- views
     |- Home
     |- Popup // search popup
-    |- Categary
+    |- Category
     |- Detail
     |- Cart
     |- User

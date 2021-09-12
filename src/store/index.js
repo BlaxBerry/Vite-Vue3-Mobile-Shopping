@@ -1,4 +1,5 @@
 import { createStore } from 'vuex'
+import Login from '../api/user/userLogin'
 
 export default createStore({
     state: {
@@ -11,8 +12,19 @@ export default createStore({
             resPage: 1,
             isEmptyList: true
         },
+        // user login popup show
+        isShowUserLoginPopup: false,
 
+        // user info
+        user: {
+            avatar: '',
+            gender: '',
+            id: '',
+            nickname: '',
+            username: ''
+        }
     },
+
     mutations: {
         // get popup search input value
         getSearchValue(state, params) {
@@ -22,8 +34,28 @@ export default createStore({
         getSearchResult(state, params) {
             state.searchResult = params
             state.searchResult.isEmptyList = state.searchResult.list.length == 0 ? true : false
+        },
+        // show user login popup
+        showUserLoginPopup(state) {
+            state.isShowUserLoginPopup = true
+        },
+        // close user login popup
+        closeUserLoginPopup(state) {
+            state.isShowUserLoginPopup = false
+        },
+        // save user info login
+        saveUserInfo(state, params) {
+            let data = params.userInfo
+            state.user.avatar = data.avatar
+            state.user.gender = data.gender
+            state.user.id = data.id
+            state.user.nickname = data.nickname
+            state.user.username = data.username
+            state.user.token = params.token
+            console.log(state.user);
         }
     },
+
     getters: {
         // search result list
         list: (state) => {
@@ -40,10 +72,22 @@ export default createStore({
         // search result current page
         currentPage: (state) => {
             return state.searchResult.resPage
+        },
+    },
+
+    actions: {
+        // get user login info
+        getUserInfo(context, params) {
+            // axios get login info
+            Login(params).then(res => {
+                console.log(res);
+                if (res.errno == 0) {
+                    context.commit('saveUserInfo', res.data)
+                }
+            })
         }
     },
-    actions: {
-    },
+
     modules: {
     }
 })

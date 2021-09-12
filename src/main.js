@@ -37,6 +37,12 @@ import {
     DropdownItem,
     Empty,
     Lazyload,
+    Tabbar,
+    TabbarItem,
+    Popup,
+    Form,
+    Field,
+    CellGroup
 } from 'vant';
 app.use(Button)
     .use(Search)
@@ -53,6 +59,11 @@ app.use(Button)
     .use(DropdownItem)
     .use(Empty)
     .use(Lazyload)
-
+    .use(Tabbar)
+    .use(TabbarItem)
+    .use(Popup)
+    .use(Form)
+    .use(Field)
+    .use(CellGroup)
 
 app.mount('#app')

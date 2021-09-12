@@ -10,6 +10,7 @@
         <van-icon
           :name="listName == 'historyList' ? 'clock-o' : 'fire-o'"
           size="0.5rem"
+          :color="listName == 'hotList' ? '#ff6034' : ''"
         />
         {{ listName.replace("List", "").toUpperCase() }}
       </h4>
@@ -36,7 +37,7 @@
         v-for="item in listItem"
         :key="item"
         plain
-        :type="item.is_hot == 1 ? 'danger' : 'default'"
+        :color="item.is_hot == 1 ? '#ff6034' : ''"
         v-text="item.keyword"
         @click="goPopupResList(item.keyword)"
       />
