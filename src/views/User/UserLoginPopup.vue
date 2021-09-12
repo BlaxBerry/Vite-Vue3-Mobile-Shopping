@@ -7,7 +7,7 @@
     close-icon="close"
     :style="{ width: '90%', padding: '1rem 0 0.5rem' }"
   >
-    <h2 class="title" v-text="'用户登陆'" />
+    <h2 class="title" v-text="'用户登陆 / 注册'" />
     <LoginForm />
   </van-popup>
 </template>

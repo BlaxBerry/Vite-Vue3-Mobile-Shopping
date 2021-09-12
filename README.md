@@ -27,15 +27,19 @@ SPA Mobile EC shopping web application.
     |- Cards
     |- Empty
     |- Menu
+    |- Form
     ...
 |- hooks
     |- useHomeListDetail.js
     |- usePopupKeywords.js
-    |- usePopupResult.js    
+    |- usePopupResult.js  
     ...
 |- utils
     |- request.js // network request
     |- filters
+        ...
+    |- handleUserGridItems
+        ...
     ...
 |- store 
     |- index.js // vuex
@@ -43,9 +47,15 @@ SPA Mobile EC shopping web application.
     |- Home
     |- Popup // search popup
     |- Category
+    |- Topics
     |- Detail
     |- Cart
     |- User
+    |- UserGrid
+        |- UserInfo
+        |- Orders
+        |- Coupons
+        |- Location
     ...
 |- App.vue
 |- main.js

@@ -1,5 +1,6 @@
 import { createStore } from 'vuex'
 import Login from '../api/user/userLogin'
+import pic from '../assets/images/avatar.png'
 
 export default createStore({
     state: {
@@ -17,10 +18,10 @@ export default createStore({
 
         // user info
         user: {
-            avatar: '',
+            avatar: pic,
             gender: '',
             id: '',
-            nickname: '',
+            nickname: '点击登陆',
             username: ''
         }
     },
@@ -46,13 +47,16 @@ export default createStore({
         // save user info login
         saveUserInfo(state, params) {
             let data = params.userInfo
+            // 1. save as common state in vuex
             state.user.avatar = data.avatar
             state.user.gender = data.gender
             state.user.id = data.id
             state.user.nickname = data.nickname
             state.user.username = data.username
             state.user.token = params.token
-            console.log(state.user);
+            // 2. save the user info in localStorage
+            let user = JSON.stringify(state.user)
+            localStorage.setItem('user', user)
         }
     },
 
@@ -80,9 +84,10 @@ export default createStore({
         getUserInfo(context, params) {
             // axios get login info
             Login(params).then(res => {
-                console.log(res);
+                // console.log(res);
                 if (res.errno == 0) {
                     context.commit('saveUserInfo', res.data)
+                    context.commit("closeUserLoginPopup");
                 }
             })
         }

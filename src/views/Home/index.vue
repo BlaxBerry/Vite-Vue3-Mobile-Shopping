@@ -1,15 +1,18 @@
 <template>
-  <!-- 1. search bar -->
-  <SearchBar />
+  <!-- main  -->
+  <div v-if="$route.path == '/home'">
+    <!-- 1. search bar -->
+    <SearchBar />
 
-  <!-- 2. banner swiper -->
-  <Swiper :list="Lists.banner" />
+    <!-- 2. banner swiper -->
+    <Swiper :list="Lists.banner" />
 
-  <!-- 3. channel icon -->
-  <ChannelIcons :list="Lists.channel" />
+    <!-- 3. channel icon -->
+    <ChannelIcons :list="Lists.channel" />
 
-  <!-- 4. brand list -->
-  <Brands :list="Lists.brandList" />
+    <!-- 4. brand list -->
+    <Brands :list="Lists.brandList" />
+  </div>
 
   <!-- show popup -->
   <router-view></router-view>
@@ -31,9 +34,7 @@ export default {
     // get and use Home Details Lists
     const { Lists } = useHomeDetailList();
 
-    return {
-      Lists,
-    };
+    return { Lists };
   },
 };
 </script>

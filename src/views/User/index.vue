@@ -12,7 +12,7 @@
 <script>
 // components
 import Top from "./UserTop.vue";
-import Grid from "./UserGrid.vue";
+import Grid from "./UserGridLayout.vue";
 import Popup from "./UserLoginPopup.vue";
 
 export default {

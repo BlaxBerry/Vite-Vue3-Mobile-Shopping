@@ -1,46 +1,52 @@
 <template>
   <van-row justify="space-between">
     <van-col span="6">
-      <van-image round :src="avatar" />
+      <van-image round :src="user.avatar" />
     </van-col>
-    <van-col span="12">
-      <div>点击登陆</div>
-    </van-col>
-    <van-col span="6">
+    <van-col :span="user.token ? '18' : '12'" v-text="user.nickname" />
+    <van-col span="6" v-if="!user.token">
       <van-button
         type="primary"
         color="linear-gradient(to right, #ff6034, #ee0a24)"
         v-text="'Login'"
         is-link
+        round
         @click="showLoginPopup"
       />
-      <!-- <van-button type="primary">Logout</van-button> -->
     </van-col>
   </van-row>
 </template>
 
 <script>
-import pic from "../../assets/images/avatar.png";
-import { ref } from "vue";
+import { computed, reactive } from "vue";
 import { useStore } from "vuex";
 
 export default {
   emits: ["onShowLoginPopup"],
   setup() {
-    // avatar
-    let avatar = ref("");
-    avatar.value = pic;
+    const store = useStore();
+
+    let user = reactive({});
+    let userLocalStorage = JSON.parse(localStorage.getItem("user"));
+
+    // 页面加载时判断
+    if (userLocalStorage) {
+      // if there is user info in localStorage, already Login
+      // get the user info from localStorage
+      user = userLocalStorage;
+    } else {
+      // if there no user info in localStorage, not login yet
+      // get user info from Vuex's state
+      user = computed(() => store.state.user);
+    }
 
     // click to show user login popup
-    const store = useStore();
     let showLoginPopup = () => {
-      store.commit("showUserLoginPopup");
+      // if there no user info in localStorage,show login popup
+      if (!userLocalStorage) store.commit("showUserLoginPopup");
     };
 
-    return {
-      avatar,
-      showLoginPopup,
-    };
+    return { user, showLoginPopup };
   },
 };
 </script>

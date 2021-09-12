@@ -33,18 +33,31 @@
 </template>
 
 <script>
-import { ref } from "vue";
+import { ref, reactive } from "vue";
 import { useStore } from "vuex";
 
 export default {
   setup() {
     const store = useStore();
 
-    const username = ref("");
-    const password = ref("");
+    const username = ref("wuyanzu");
+    const password = ref("123456789");
+    let userInfoLocalStorage = reactive({});
+
     const onSubmit = (values) => {
       // send login request and save the respose by vuex action
       store.dispatch("getUserInfo", values);
+
+      // // localStorage
+      // userInfoLocalStorage = JSON.parse(localStorage.getItem("user"));
+      // console.log(userInfoLocalStorage);
+
+
+
+      // avatar.value = userInfoLocalStorage ? userInfoLocalStorage.avatar : pic;
+      // name.value = userInfoLocalStorage
+      //   ? userInfoLocalStorage.nickname
+      //   : "点击登陆";
     };
 
     return { username, password, onSubmit };

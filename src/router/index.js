@@ -43,6 +43,30 @@ const routes = [
         name: 'User',
         component: () => import('../views/User/index.vue'),
     },
+    // user info
+    {
+        path: '/user/info',
+        name: 'UserInfo',
+        component: () => import('../views/UserGrids/GridUserInfo.vue'),
+    },
+    // orders
+    {
+        path: '/orders',
+        name: 'Orders',
+        component: () => import('../views/UserGrids/GridOrders.vue'),
+    },
+    // orders location
+    {
+        path: '/user/locations',
+        name: 'Locations',
+        component: () => import('../views/UserGrids/GridLocation.vue'),
+    },
+    // coupons
+    {
+        path: '/coupons',
+        name: 'Coupons',
+        component: () => import('../views/UserGrids/GridCoupons.vue'),
+    },
     // product detail
     {
         path: '/detail',

@@ -1,5 +1,9 @@
 <template>
-  <transition name="van-slide-right" appear>
+  <transition
+    name="van-slide-right"
+    appear
+    v-if="$route.path == '/home/search'"
+  >
     <div class="popup" v-if="isPopupShow">
       <!-- 1. search bar -->
       <SearchBar @onGetInputVal="toggleKeywordsOrResult" />
