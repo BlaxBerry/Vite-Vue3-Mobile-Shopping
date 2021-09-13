@@ -25,7 +25,7 @@ export default function useHomeDetailList() {
         Lists.hotGoodsList = res.data.hotGoodsList
         Lists.newGoodsList = res.data.newGoodsList
         Lists.topicLis = res.data.opicList
-        // console.log(Lists);
+        console.log(Lists);
     }
     // created
     getHomeDetailList()

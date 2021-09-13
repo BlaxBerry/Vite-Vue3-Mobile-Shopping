@@ -25,36 +25,41 @@ img {
 .van-grid {
   padding: 0.2rem;
 }
-
-// home
-// home block
+// block
 .home-block {
-  padding: 0.1rem 0 0.5rem;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
   background-color: #fff;
   .title {
-    text-align: center;
-    padding: 0.4rem 0;
+    padding-top: 0;
   }
-  .home-brand {
-    .van-col {
-      position: relative;
+  .desc {
+    text-align: center;
+    padding-bottom: 0.2rem;
+    font-size: @htmlFontSize;
+  }
+}
+
+// home
+.home-brand {
+  .van-col {
+    position: relative;
+    overflow: hidden;
+    p {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 100%;
+      padding: 0.2rem 0;
+      padding-right: @cardPriceFontSize;
+      background-color: rgba(0, 0, 0, 0.5);
+      font-size: @cardPriceFontSize;
+      font-weight: 700;
+      text-align: right;
+      color: #fff;
       overflow: hidden;
-      p {
-        position: absolute;
-        bottom: 0;
-        right: 0;
-        width: 100%;
-        padding: 0.2rem 0;
-        padding-right: @cardPriceFontSize;
-        background-color: rgba(0, 0, 0, 0.5);
-        font-size: @cardPriceFontSize;
-        font-weight: 700;
-        text-align: right;
-        color: #fff;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-      }
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
   }
 }
@@ -90,6 +95,7 @@ img {
 // cards
 .card-list {
   padding: 1%;
+  padding-bottom: 1.5rem;
   .card {
     padding: 1% 0;
     margin: 0.2rem;
@@ -102,10 +108,76 @@ img {
       white-space: nowrap;
       font-size: @cardPriceFontSize;
     }
-    .price {
-      padding: 0.1rem;
+  }
+}
+.price {
+  padding: 0.1rem;
+  font-size: @cardPriceFontSize;
+  font-weight: 700;
+  text-align: center;
+  color: brown;
+}
+
+// detail
+#detail {
+  margin-bottom: 1.3rem;
+
+  .attribute {
+    h4 {
+      font-size: 0.5rem;
+      padding-bottom: 0.2rem;
+    }
+    .van-row {
+      background-color: @backgroundColor;
+      padding: 0.2rem;
+      margin: 0.1rem 0;
+      border-radius: 0.2rem;
       font-size: @cardPriceFontSize;
-      color: @cardPriceFontColor;
+      .name {
+        text-align: right;
+        padding-right: @cardPriceFontSize;
+      }
+      .value {
+        text-align: left;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
+  }
+  .issue {
+    font-size: 0.3rem;
+    h3 {
+      color: brown;
+      font-weight: 700;
+    }
+    p {
+      padding: 0.1rem 0.4rem 0.2rem;
+      font-size: 0.2rem;
+      color: #333;
+    }
+  }
+  .detail-action-bar {
+    bottom: 1.3rem !important;
+    z-index: 3000;
+  }
+  .sku {
+    padding: 0.5rem 0;
+    bottom: 2rem;
+    .top-info {
+      align-items: center;
+      .van-row {
+        margin: 0.1rem 0;
+        .data-msg {
+          text-align: left;
+          padding-left: 0.2rem;
+        }
+      }
+    }
+    .bottom-content {
+      display: flex;
+      align-items: center;
+      padding: 0.5rem;
     }
   }
 }

@@ -1,12 +1,12 @@
 <template>
   <van-swipe
-    v-if="list.length != 0"
-    class="home-swipe"
     :autoplay="3000"
-    indicator-color="white"
+    lazy-render
+    v-if="list.length != 0"
+    indicator-color="#ff6034"
   >
     <van-swipe-item v-for="item in list" :key="item.id">
-      <img :src="item.image_url" :alt="item.name" />
+      <img :src="item.img_url || item.image_url" />
     </van-swipe-item>
   </van-swipe>
 </template>

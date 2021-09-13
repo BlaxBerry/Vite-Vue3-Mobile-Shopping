@@ -23,7 +23,7 @@
 import useHomeDetailList from "../../hooks/useHomeDetailsList";
 // components
 import SearchBar from "./HomeSearchBar.vue";
-import Swiper from "./HomeSwiper.vue";
+import Swiper from "../../components/swiper/Swiper.vue";
 import ChannelIcons from "./HomeChannels.vue";
 import Brands from "./HomeBrands.vue";
 

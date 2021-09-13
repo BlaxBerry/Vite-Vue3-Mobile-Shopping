@@ -96,10 +96,10 @@ router.beforeEach((to, from, next) => {
     // from: route being navigated away from
 
     // get token form localstorage
-    let token = localStorage.getItem('token')
+    let userLogin = localStorage.getItem('user')
     // decide the message Dialog show
     if (to.path == '/cart') {
-        if (token) {
+        if (userLogin) {
             // find token in localstorage
             //
             next()

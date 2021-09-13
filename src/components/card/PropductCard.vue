@@ -15,16 +15,20 @@
 </template>
 
 <script>
-import { useRouter } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 export default {
   props: ["list"],
 
   setup(props) {
     const router = useRouter();
+    const route = useRoute();
 
     // click to go to producter detail route
     let goDetail = (id) => {
-      router.push("/detail");
+      router.push("/detail?id=" + id);
+      // if (route.path == "/detail") {
+      //   router.go(0);
+      // }
     };
 
     return { goDetail };

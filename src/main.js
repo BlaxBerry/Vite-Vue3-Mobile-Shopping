@@ -42,7 +42,14 @@ import {
     Popup,
     Form,
     Field,
-    CellGroup
+    Cell,
+    CellGroup,
+    Divider,
+    ActionBar,
+    ActionBarIcon,
+    ActionBarButton,
+    Stepper
+
 } from 'vant';
 app.use(Button)
     .use(Search)
@@ -64,6 +71,12 @@ app.use(Button)
     .use(Popup)
     .use(Form)
     .use(Field)
+    .use(Cell)
     .use(CellGroup)
+    .use(Divider)
+    .use(ActionBar)
+    .use(ActionBarIcon)
+    .use(ActionBarButton)
+    .use(Stepper)
 
 app.mount('#app')
