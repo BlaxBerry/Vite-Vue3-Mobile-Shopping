@@ -10,6 +10,9 @@ html {
 body {
   background-color: @backgroundColor;
 }
+#app {
+  background-color: #fff;
+}
 
 img {
   display: block;
@@ -21,78 +24,14 @@ img {
 .title {
   text-align: center;
   padding: 0.4rem 0;
+  font-size: 0.5rem;
+}
+.subtitle {
+  text-align: center;
+  font-size: 0.4rem;
 }
 .van-grid {
   padding: 0.2rem;
-}
-// block
-.home-block {
-  padding: 0.5rem;
-  margin-bottom: 0.5rem;
-  background-color: #fff;
-  .title {
-    padding-top: 0;
-  }
-  .desc {
-    text-align: center;
-    padding-bottom: 0.2rem;
-    font-size: @htmlFontSize;
-  }
-}
-.grid-block {
-  margin: 1.5rem 0.5rem;
-}
-
-// home
-.home-brand {
-  .van-col {
-    position: relative;
-    overflow: hidden;
-    p {
-      position: absolute;
-      bottom: 0;
-      right: 0;
-      width: 100%;
-      padding: 0.2rem 0;
-      padding-right: @cardPriceFontSize;
-      background-color: rgba(0, 0, 0, 0.5);
-      font-size: @cardPriceFontSize;
-      font-weight: 700;
-      text-align: right;
-      color: #fff;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-  }
-}
-
-// popup route
-.popup {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  z-index: 2;
-  background-color: @backgroundColor;
-  .popup-keywords {
-    padding: 0.5rem;
-    margin-bottom: 0.5rem;
-    background-color: #fff;
-    .title {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .tags {
-      padding: 0.2rem 0;
-      span {
-        margin: 0.15rem;
-        padding: 0.15rem;
-        font-size: @cardPriceFontSize;
-      }
-    }
-  }
 }
 
 // cards
@@ -121,94 +60,46 @@ img {
   color: brown;
 }
 
-// detail
-#detail {
-  margin-bottom: 1.3rem;
-
-  .attribute {
-    h4 {
-      font-size: 0.5rem;
-      padding-bottom: 0.2rem;
-    }
-    .van-row {
-      background-color: @backgroundColor;
-      padding: 0.2rem;
-      margin: 0.1rem 0;
-      border-radius: 0.2rem;
-      font-size: @cardPriceFontSize;
-      .name {
-        text-align: right;
-        padding-right: 0.2rem;
-      }
-      .value {
-        text-align: left;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-      }
-    }
-  }
-  .issue {
-    font-size: 0.3rem;
-    h3 {
-      color: brown;
-      font-weight: 700;
-    }
-    p {
-      padding: 0.1rem 0.4rem 0.2rem;
-      font-size: 0.2rem;
-      color: #333;
-    }
-  }
-  .detail-action-bar {
-    bottom: 1.3rem !important;
-    z-index: 3000;
-  }
-  .sku {
-    padding: 0.5rem 0;
-    bottom: 2rem;
-    .top-info {
-      align-items: center;
-      .van-row {
-        margin: 0.1rem 0;
-        .data-msg {
-          text-align: left;
-          padding-left: 0.2rem;
-        }
-      }
-    }
-    .bottom-content {
-      display: flex;
-      align-items: center;
-      padding: 0.5rem;
-    }
-  }
-}
-
-// grid
-.user-grid-info {
-  position: absolute;
-  top: 20%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 90%;
+// block
+.home-block {
+  padding: 0.5rem 0;
+  margin: 0.5rem 0;
   background-color: #fff;
-  padding: 1.5rem 0 0.5rem;
-  border-radius: @htmlFontSize;
-  .info {
-    padding: 0.4rem 0 0;
-    .van-row {
-      align-items: center;
-      margin: 0.4rem 0;
-      .name {
-        text-align: right;
-        font-size: @htmlFontSize;
-        color: brown;
-      }
-      .value {
-        text-align: left;
-        padding-left: @htmlFontSize;
-      }
-    }
+  .title {
+    padding-top: 0;
+    font-size: 0.6rem;
+    color: brown;
+  }
+  .van-divider {
+    margin-bottom: 0;
+  }
+  .desc {
+    text-align: center;
+    padding-bottom: 0.2rem;
+    font-size: @htmlFontSize;
   }
 }
+.grid-block {
+  margin: 1.5rem 0.5rem;
+}
+.main-block {
+  margin-top: 1.2rem;
+}
+
+// home view
+@import "./mian-home.less";
+
+// popup view
+@import "./main-home-popup.less";
+
+// detail view
+@import "./main-good-detail.less";
+
+// grid view
+@import "./main-user-grids.less";
+
+// topic view
+@import "./main-topics.less";
+
+// category view
+@import './main-category.less';

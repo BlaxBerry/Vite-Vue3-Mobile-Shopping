@@ -12,7 +12,7 @@ export default {
         fontWeight: "700",
         borderColor: "#ccc",
         padding: "0 0.4rem",
-        marginTop: "0",
+        margin: "0",
       },
     };
   },

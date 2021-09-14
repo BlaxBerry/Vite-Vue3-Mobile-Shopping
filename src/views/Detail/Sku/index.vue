@@ -11,7 +11,7 @@
     </div>
 
     <!-- 3. middle attribute -->
-    <div v-if="attribute.length > 0" class="home-block attribute">
+    <div v-if="attribute.length" class="attribute">
       <h4 v-text="'商品参数'" />
       <van-row v-for="item in attribute" :key="item">
         <van-col span="5" v-text="item.name" class="name" />

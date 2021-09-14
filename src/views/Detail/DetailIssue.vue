@@ -1,5 +1,5 @@
 <template>
-  <div class="home-block issue">
+  <div class="issue">
     <Divider :text="'常见问题'" />
     <ul>
       <li v-for="item in issue" :key="item.id">

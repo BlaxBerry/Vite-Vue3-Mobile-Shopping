@@ -50,8 +50,12 @@ import {
     ActionBarButton,
     Stepper,
     NavBar,
-    CouponCell, 
+    CouponCell,
     CouponList,
+    NoticeBar,
+    Pagination,
+    Sidebar,
+    SidebarItem
 
 } from 'vant';
 app.use(Button)
@@ -84,5 +88,9 @@ app.use(Button)
     .use(NavBar)
     .use(CouponCell)
     .use(CouponList)
+    .use(NoticeBar)
+    .use(Pagination)
+    .use(Sidebar)
+    .use(SidebarItem)
 
 app.mount('#app')

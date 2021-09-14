@@ -1,7 +1,13 @@
 <template>
   <div id="detail">
     <!-- 1. swiper/ -->
-    <Swiper :list="goodsDetail.gallery" v-if="goodsDetail.isShowDetail" />
+    <Swiper :list="goodsDetail.gallery" v-if="goodsDetail.gallery.length" />
+    <!--  img -->
+    <van-image
+      v-if="!goodsDetail.gallery.length && goodsDetail.info.primary_pic_url"
+      lazy-load
+      :src="goodsDetail.info.primary_pic_url"
+    />
 
     <!-- 2. quality promise bar -->
     <Tips v-if="goodsDetail.isShowDetail" />
@@ -15,13 +21,6 @@
 
     <!-- 4. detail content -->
     <div v-html="goodsDetail.info.goods_desc" />
-
-    <!-- 5. img -->
-    <van-image
-      v-if="goodsDetail.info.primary_pic_url"
-      lazy-load
-      :src="goodsDetail.info.primary_pic_url"
-    />
 
     <!-- 6. Issue question -->
     <Issue :issue="goodsDetail.issue" v-if="goodsDetail.isShowDetail" />

@@ -1,0 +1,71 @@
+@import "./common.less";
+
+#detail {
+  margin-bottom: 1.3rem;
+
+  .attribute {
+    padding: 0.5rem;
+    margin: 0.5rem 0;
+    background-color: #fff;
+    h4 {
+      font-size: 0.5rem;
+      padding-bottom: 0.2rem;
+    }
+    .van-row {
+      background-color: @backgroundColor;
+      padding: 0.2rem;
+      margin: 0.1rem;
+      border-radius: 0.2rem;
+      font-size: @cardPriceFontSize;
+      .name {
+        text-align: right;
+        padding-right: 0.2rem;
+      }
+      .value {
+        text-align: left;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
+  }
+
+  .issue {
+    padding: 0.5rem;
+    margin: 0.5rem 0;
+    background-color: #fff;
+    font-size: 0.3rem;
+    h3 {
+      color: brown;
+      font-weight: 700;
+    }
+    p {
+      padding: 0.1rem 0.4rem 0.2rem;
+      font-size: 0.2rem;
+      color: #333;
+    }
+  }
+  .detail-action-bar {
+    bottom: 1.3rem !important;
+    z-index: 3000;
+  }
+  .sku {
+    padding: 0.5rem 0;
+    bottom: 2rem;
+    .top-info {
+      align-items: center;
+      .van-row {
+        margin: 0.1rem 0;
+        .data-msg {
+          text-align: left;
+          padding-left: 0.2rem;
+        }
+      }
+    }
+    .bottom-content {
+      display: flex;
+      align-items: center;
+      padding: 0.5rem;
+    }
+  }
+}

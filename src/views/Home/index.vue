@@ -1,6 +1,6 @@
 <template>
   <!-- main  -->
-  <div v-if="$route.path == '/home'">
+  <div v-if="$route.path == '/home'" id="home">
     <!-- 1. search bar -->
     <SearchBar />
 
@@ -12,6 +12,9 @@
 
     <!-- 4. brand list -->
     <Brands :list="Lists.brandList" />
+
+    <!-- 5. category List -->
+    <Categorys :list="Lists.categoryList" />
   </div>
 
   <!-- show popup -->
@@ -26,13 +29,19 @@ import SearchBar from "./HomeSearchBar.vue";
 import Swiper from "../../components/swiper/Swiper.vue";
 import ChannelIcons from "./HomeChannels.vue";
 import Brands from "./HomeBrands.vue";
+import Categorys from "./HomeCategoryList.vue";
+// utils
+import loading from "../../utils/loading/loading";
 
 export default {
-  components: { SearchBar, Swiper, ChannelIcons, Brands },
+  components: { SearchBar, Swiper, ChannelIcons, Brands, Categorys },
 
   setup() {
     // get and use Home Details Lists
     const { Lists } = useHomeDetailList();
+
+    // show toast before the data rendered
+    loading();
 
     return { Lists };
   },

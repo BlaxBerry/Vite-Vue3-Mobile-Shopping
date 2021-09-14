@@ -1,7 +1,7 @@
 <template>
-  <div class="home-block" v-if="list.length != 0">
+  <div class="home-block" v-if="list.length">
     <!-- title -->
-    <div class="title"><h3>Brands</h3></div>
+    <h3 class="title">品牌直供</h3>
 
     <!-- pics list -->
     <van-row justify="space-between" class="home-brand">
