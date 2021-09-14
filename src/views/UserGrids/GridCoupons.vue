@@ -1,13 +1,14 @@
 <template>
-  coupons
+  <Nav />
 </template>
 
 <script>
-export default {
+// components
+import Nav from "../../components/nav/NavBer.vue";
 
-}
+export default {
+  components: { Nav },
+};
 </script>
 
-<style>
-
-</style>
+<style></style>

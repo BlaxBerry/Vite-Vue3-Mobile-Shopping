@@ -9,12 +9,16 @@
       />
     </van-col>
     <van-col span="16">
+      <h3
+        class="price"
+        v-text="'¥ ' + (info.retail_price * stepperVal).toFixed(2)"
+      />
       <van-row>
-        <van-col span="4">名称:</van-col>
+        <van-col span="4"><b>名称:</b></van-col>
         <van-col span="18" class="data-msg" v-text="info.name" />
       </van-row>
       <van-row>
-        <van-col span="4">价格:</van-col>
+        <van-col span="4"><b>单价:</b></van-col>
         <van-col
           span="18"
           class="data-msg"
@@ -22,7 +26,7 @@
         />
       </van-row>
       <van-row>
-        <van-col span="4">库存:</van-col>
+        <van-col span="4"><b>库存:</b></van-col>
         <van-col
           span="18"
           class="data-msg"
@@ -37,9 +41,14 @@
 
 <script>
 export default {
-  props: ["info"],
+  props: ["info", "stepperVal"],
   setup(props) {},
 };
 </script>
 
-<style></style>
+<style lang="less" scoped>
+.price {
+  font-size: 0.7rem;
+  text-align: left;
+}
+</style>

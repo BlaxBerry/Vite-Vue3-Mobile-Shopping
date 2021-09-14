@@ -21,7 +21,7 @@ export default createStore({
             avatar: pic,
             gender: '',
             id: '',
-            nickname: '点击登陆',
+            nickname: '请先登陆',
             username: ''
         }
     },

@@ -46,7 +46,7 @@ import Issue from "./DetailIssue.vue";
 import Recommend from "./DetailRecommendList.vue";
 import GoodActionBar from "./DetailGoodActionBar.vue";
 // utils
-import loading from "../../utils/loading";
+import loading from "../../utils/loading/loading";
 
 export default {
   components: { Swiper, Tips, Info, Issue, Recommend, GoodActionBar },

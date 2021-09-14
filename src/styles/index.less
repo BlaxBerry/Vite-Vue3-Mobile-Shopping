@@ -39,6 +39,9 @@ img {
     font-size: @htmlFontSize;
   }
 }
+.grid-block {
+  margin: 1.5rem 0.5rem;
+}
 
 // home
 .home-brand {
@@ -135,7 +138,7 @@ img {
       font-size: @cardPriceFontSize;
       .name {
         text-align: right;
-        padding-right: @cardPriceFontSize;
+        padding-right: 0.2rem;
       }
       .value {
         text-align: left;
@@ -178,6 +181,34 @@ img {
       display: flex;
       align-items: center;
       padding: 0.5rem;
+    }
+  }
+}
+
+// grid
+.user-grid-info {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  background-color: #fff;
+  padding: 1.5rem 0 0.5rem;
+  border-radius: @htmlFontSize;
+  .info {
+    padding: 0.4rem 0 0;
+    .van-row {
+      align-items: center;
+      margin: 0.4rem 0;
+      .name {
+        text-align: right;
+        font-size: @htmlFontSize;
+        color: brown;
+      }
+      .value {
+        text-align: left;
+        padding-left: @htmlFontSize;
+      }
     }
   }
 }

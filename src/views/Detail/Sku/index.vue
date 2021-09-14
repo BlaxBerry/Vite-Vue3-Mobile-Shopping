@@ -2,8 +2,8 @@
   <van-cell title="展示商品详情" icon="shop-o" is-link @click="showPopup" />
   <van-popup v-model:show="show" position="bottom" closeable round class="sku">
     <!-- 1. top -->
-    <Top :info="info" />
-    
+    <Top :info="info" :stepperVal="stepperVal" />
+
     <!-- 2. stepper -->
     <div class="bottom-content">
       数量：
