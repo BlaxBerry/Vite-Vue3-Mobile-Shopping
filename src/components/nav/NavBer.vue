@@ -13,12 +13,18 @@ export default {
 
     const onClickLeft = () => router.go(-1);
 
-    return {
-      onClickLeft,
-      name,
-    };
+    return { onClickLeft, name };
   },
 };
 </script>
 
-<style></style>
+<style lang="less" scoped>
+.van-nav-bar {
+  background: linear-gradient(to right, #ff6034, #ee0a24);
+  /deep/.van-icon,
+  /deep/.van-nav-bar__title {
+    color: #fff;
+    font-size: 0.5rem;
+  }
+}
+</style>

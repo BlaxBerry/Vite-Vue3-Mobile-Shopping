@@ -2,27 +2,33 @@
 
 .user-grid-info {
   position: absolute;
-  top: 20%;
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%);
-  width: 90%;
-  background-color: #fff;
-  padding: 1.5rem 0 0.5rem;
-  border-radius: @htmlFontSize;
-  .info {
-    padding: 0.4rem 0 0;
-    .van-row {
-      align-items: center;
-      margin: 0.4rem 0;
-      .name {
-        text-align: right;
-        font-size: @htmlFontSize;
-        color: brown;
+  transform: translate(-50%, -50%);
+  width: 100%;
+
+  .van-row {
+    align-items: center;
+    font-weight: 700;
+    .van-col {
+      margin: 0.2rem 0;
+      .van-image {
+        width: 70%;
+        margin: 0 auto 0.5rem;
       }
-      .value {
-        text-align: left;
-        padding-left: @htmlFontSize;
-      }
+    }
+    .name {
+      text-align: right;
+      font-size: @htmlFontSize;
+      color: brown;
+    }
+    .value {
+      text-align: left;
+      font-size: 0.5rem;
+      padding-left: @htmlFontSize;
+    }
+    .van-button {
+      margin: 0.5rem;
     }
   }
 }

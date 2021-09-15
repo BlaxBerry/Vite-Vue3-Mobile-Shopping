@@ -5,7 +5,7 @@
     <van-notice-bar
       left-icon="volume-o"
       scrollable
-      text="因为该项目是架空APP，导致各个商品话题为固定假数据，所以分页切换时页面无变化（实则已经切换但是数据一致），且无法点击话题查看内容。"
+      text="因为该项目是架空APP，导致各个商品话题为固定假数据，所以无法点击话题查看内容。"
     />
 
     <!-- 2. list -->
@@ -29,7 +29,7 @@ import Cards from "../../components/card/TopicCard.vue";
 import useTopicDetail from "../../hooks/TopicView/useTopDetail.js";
 // utils
 import loading from "../../utils/loading/loading";
-import { reactive, ref } from "@vue/reactivity";
+import { ref, reactive } from "@vue/reactivity";
 
 export default {
   components: { Nav, Cards },
@@ -37,13 +37,20 @@ export default {
   setup() {
     // pages
     const currentPage = ref(1);
-    const changPage = () => {
-      topList = useTopicDetail(currentPage.value);
-    };
+    // topic list
+    let topList = reactive({
+      list: [],
+      totalPage: 0,
+      currnetPage: currentPage.value,
+    });
 
     // use hooks to get topic list
-    let topList = reactive({});
-    topList = useTopicDetail(currentPage.value);
+    useTopicDetail(topList, currentPage.value);
+
+    // click page to change topic lict
+    const changPage = () => {
+      useTopicDetail(topList, currentPage.value);
+    };
 
     // show toast before the data rendered
     loading();
@@ -52,5 +59,3 @@ export default {
   },
 };
 </script>
-
-<style></style>

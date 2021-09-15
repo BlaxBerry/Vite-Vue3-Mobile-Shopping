@@ -1,25 +1,38 @@
 @import "./common.less";
 
 #category {
-  margin-top: 1.2rem;
-  height: 90vh;
-  background-color: #fff;
+  margin-top: 1.3rem;
+  margin-bottom: 1.3rem;
+  // background-color: #fff;
   display: flex;
+  justify-content: flex-end;
   .left-nav {
-    height: 100%;
-    background-color: #f7f8fa;
+    position: fixed;
+    top: 1.3rem;
+    left: 0;
     .van-sidebar-item {
       text-align: center;
+      background-color: @backgroundColor;
+    }
+    .van-sidebar-item--select {
+      background-color: #fff;
+      color: #ee0a24;
+      &::before{
+        left: 10px;
+      }
     }
   }
   .right-content {
+    width: 79%;
+    // flex: 1;
+    background-color: #fff;
     .van-image {
       margin-bottom: 0.2rem;
     }
     .van-grid {
       .van-icon__image {
-        width: 2.5em;
-        height: 2.5em;
+        width: 2rem;
+        height: 2rem;
       }
     }
   }

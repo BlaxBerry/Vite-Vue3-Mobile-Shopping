@@ -8,6 +8,7 @@ export default function useCategoryCurrentContnet(CurrentContnet, id) {
         let res = await getCategoryCurrnetContent({ id })
         if (res.errno == 0) {
             let { data } = res
+            console.log(data);
             CurrentContnet.name = data.currentCategory.name
             CurrentContnet.desc = data.currentCategory.front_desc
             CurrentContnet.descIcon = data.currentCategory.icon_url
@@ -20,5 +21,5 @@ export default function useCategoryCurrentContnet(CurrentContnet, id) {
 
 
     // return 
-    return CurrentContnet
+    // return CurrentContnet
 }

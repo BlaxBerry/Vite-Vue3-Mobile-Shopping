@@ -1,12 +1,14 @@
 <template>
-  <!-- 1. Top -->
-  <Top />
+  <div id="user">
+    <!-- 1. Top -->
+    <Top />
 
-  <!-- 2. Grid -->
-  <Grid />
+    <!-- 2. Grid -->
+    <Grid />
 
-  <!-- 3. Login Popup -->
-  <Popup />
+    <!-- 3. Login Popup -->
+    <Popup />
+  </div>
 </template>
 
 <script>

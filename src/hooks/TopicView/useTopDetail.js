@@ -1,15 +1,9 @@
 // api 
-import { reactive } from '@vue/runtime-dom'
 import GetTpoicList from '../../api/topic/getTopicList'
+// utils
+import loading from '../../utils/loading/loading'
 
-export default function useTopDetail(page = '1') {
-
-    // data
-    let topList = reactive({
-        list: [],
-        totalPage: 0,
-        currnetPage: page
-    })
+export default function useTopDetail(topList, page) {
 
     // methods
     const getLsit = async () => {
@@ -20,15 +14,14 @@ export default function useTopDetail(page = '1') {
         if (res.errno == 0) {
             let { data } = res
             topList.list = data.data
-            topList.currnetPage = data.currnetPage
+            topList.currnetPage = data.currentPage
             topList.totalPage = data.totalPages
-            console.log(topList);
+            // console.log(topList);
         }
     }
     getLsit()
 
-
-    // return
-    return topList
+    // loading
+    loading();
 
 }

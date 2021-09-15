@@ -15,6 +15,8 @@
 
     <!-- 5. category List -->
     <Categorys :list="Lists.categoryList" />
+
+    <Empty v-if="!Lists.banner.length"/>
   </div>
 
   <!-- show popup -->
@@ -30,11 +32,12 @@ import Swiper from "../../components/swiper/Swiper.vue";
 import ChannelIcons from "./HomeChannels.vue";
 import Brands from "./HomeBrands.vue";
 import Categorys from "./HomeCategoryList.vue";
+import Empty from "../../components/empty/Empty.vue";
 // utils
 import loading from "../../utils/loading/loading";
 
 export default {
-  components: { SearchBar, Swiper, ChannelIcons, Brands, Categorys },
+  components: { SearchBar, Swiper, ChannelIcons, Brands, Categorys, Empty },
 
   setup() {
     // get and use Home Details Lists

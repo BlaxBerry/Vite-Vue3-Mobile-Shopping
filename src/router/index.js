@@ -122,12 +122,16 @@ const router = createRouter({
 import gardNavagation from '../utils/gard/showNavgationGard'
 
 router.beforeEach((to, from, next) => {
-    // to: route being navigated to 
-    // from: route being navigated away from
 
+    // 1. page back to the top when route rendered
+    document.body.scrollTop = 0 // chrome
+    document.documentElement.scrollTop = 0 // firefox
+    window.pageYOffset = 0 // safari
+
+
+    // 2. navagation gard
     // get token form localstorage
     let userLogin = localStorage.getItem('user')
-
     // cart
     if (to.path == '/cart') {
         if (userLogin) {
@@ -139,7 +143,6 @@ router.beforeEach((to, from, next) => {
         }
         return
     }
-
     // user info
     if (to.path == '/user/info') {
         if (userLogin) {
@@ -151,6 +154,30 @@ router.beforeEach((to, from, next) => {
         }
         return
     }
+    // user order
+    if (to.path == '/orders') {
+        if (userLogin) {
+            // find token in localstorage
+            next()
+        } else {
+            // without token in localstorage
+            gardNavagation(router)
+        }
+        return
+    }
+    // user address
+    if (to.path == '/user/locations') {
+        if (userLogin) {
+            // find token in localstorage
+            next()
+        } else {
+            // without token in localstorage
+            gardNavagation(router)
+        }
+        return
+    }
+
+
     next()
 })
 

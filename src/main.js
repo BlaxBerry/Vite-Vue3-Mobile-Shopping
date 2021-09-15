@@ -31,6 +31,7 @@ import {
     Col,
     Row,
     Image as VanImage,
+    Loading,
     Icon,
     Tag,
     DropdownMenu,
@@ -55,7 +56,12 @@ import {
     NoticeBar,
     Pagination,
     Sidebar,
-    SidebarItem
+    SidebarItem,
+    Card,
+    SwipeCell,
+    SubmitBar,
+    Checkbox,
+    CheckboxGroup
 
 } from 'vant';
 app.use(Button)
@@ -67,6 +73,7 @@ app.use(Button)
     .use(Col)
     .use(Row)
     .use(VanImage)
+    .use(Loading)
     .use(Icon)
     .use(Tag)
     .use(DropdownMenu)
@@ -92,5 +99,10 @@ app.use(Button)
     .use(Pagination)
     .use(Sidebar)
     .use(SidebarItem)
+    .use(Card)
+    .use(SwipeCell)
+    .use(SubmitBar)
+    .use(Checkbox)
+    .use(CheckboxGroup)
 
 app.mount('#app')

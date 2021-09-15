@@ -30,7 +30,10 @@ export default {
 <style lang="less" scoped>
 .van-grid-item {
   /deep/.van-grid-item__content {
-    padding: 1rem 0;
+    padding: 0.9rem 0;
+    i {
+      font-size: 0.9rem;
+    }
   }
 }
 </style>

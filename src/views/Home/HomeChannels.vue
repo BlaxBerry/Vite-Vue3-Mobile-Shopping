@@ -9,14 +9,28 @@
       :key="item.id"
       :icon="item.icon_url"
       :text="item.name"
+      @click="clickItem(item.id)"
     />
   </van-grid>
 </template>
 
 <script>
+import { useRouter } from "vue-router";
 export default {
   props: ["list"],
-  setup(props) {},
+  setup(props) {
+    const router = useRouter();
+
+    const clickItem = (id) => {
+      router.push({
+        name: "Category",
+        params: {
+          id: id,
+        },
+      });
+    };
+    return { clickItem };
+  },
 };
 </script>
 

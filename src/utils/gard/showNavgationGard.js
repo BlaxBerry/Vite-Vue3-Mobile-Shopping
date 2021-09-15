@@ -19,5 +19,4 @@ export default function GardNavagation(router) {
         .catch(() => {
             return
         });
-
 }

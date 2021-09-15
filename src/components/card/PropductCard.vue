@@ -7,7 +7,12 @@
       :key="item"
       @click="goDetail(item.id)"
     >
-      <van-image :src="item.list_pic_url" lazy-load />
+      <van-image :src="item.list_pic_url" lazy-load>
+        <template v-slot:loading>
+          <van-loading type="spinner" />
+        </template>
+        <template v-slot:error>加载失败</template>
+      </van-image>
       <p class="card-title" v-text="item.name" />
       <p class="price">{{ "¥ " + item.retail_price.toFixed(2) + " 元" }}</p>
     </van-col>
