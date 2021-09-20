@@ -1,13 +1,26 @@
 <template>
   <van-cell title="展示商品详情" icon="shop-o" is-link @click="showPopup" />
-  <van-popup v-model:show="show" position="bottom" closeable round class="sku">
+  <van-popup
+    v-model:show="show"
+    position="bottom"
+    closeable
+    round
+    class="sku"
+    @click-overlay="closeSku"
+    @click-close-icon="closeSku"
+  >
     <!-- 1. top -->
     <Top :info="info" :stepperVal="stepperVal" />
 
     <!-- 2. stepper -->
     <div class="bottom-content">
       数量：
-      <van-stepper v-model.number="stepperVal" integer input-width="2rem" />
+      <van-stepper
+        v-model.number="stepperVal"
+        integer
+        input-width="2rem"
+        @change="changStepper"
+      />
     </div>
 
     <!-- 3. middle attribute -->
@@ -22,25 +35,43 @@
 </template>
 
 <script>
-import { ref } from "vue";
+import { computed, ref } from "vue";
 // components
 import Top from "./SkuTopInfo.vue";
+import { useStore } from "vuex";
+import { useRoute } from 'vue-router';
 
 export default {
   props: ["info", "attribute"],
   components: { Top },
 
   setup(props) {
+    const store = useStore();
+    const route = useRoute()
+
     // sku show
-    const show = ref(false);
+    let show = computed(() => store.state.sku.isSkuShow);
+    // show sku
     const showPopup = () => {
-      show.value = true;
+      store.commit("showSku");
+    };
+    // close sku
+    const closeSku = () => {
+      store.commit("closeSku");
     };
 
-    // stepper
+    // stepper value
     const stepperVal = ref(1);
+    // change amout in vuex store
+    const changStepper = () => {
+      let skuContent = {
+        goodsId:route.query.id,
+        amount: stepperVal.value,
+      };
+      store.commit("changeSku", skuContent);
+    };
 
-    return { show, showPopup, stepperVal };
+    return { show, showPopup, closeSku, stepperVal, changStepper };
   },
 };
 </script>

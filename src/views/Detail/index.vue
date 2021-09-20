@@ -19,6 +19,9 @@
       v-if="goodsDetail.isShowDetail"
     />
 
+    <!-- sku -->
+    <Sku :info="goodsDetail.info" :attribute="goodsDetail.attribute" />
+
     <!-- 4. detail content -->
     <div v-html="goodsDetail.info.goods_desc" />
 
@@ -29,7 +32,7 @@
     <Recommend :list="goodsDetail.recommend" v-if="goodsDetail.isShowDetail" />
 
     <!-- 8. GoodAction Bar -->
-    <GoodActionBar />
+    <GoodActionBar :productList="goodsDetail.productList" />
   </div>
 </template>
 
@@ -41,6 +44,7 @@ import useGoodsDetail from "../../hooks/useGoodsDetail";
 import Swiper from "../../components/swiper/Swiper.vue";
 import Tips from "../../components/tips/qualityPromise.vue";
 import Info from "./DetailInfo.vue";
+import Sku from "./Sku/index.vue";
 import Issue from "./DetailIssue.vue";
 import Recommend from "./DetailRecommendList.vue";
 import GoodActionBar from "./DetailGoodActionBar.vue";
@@ -48,7 +52,7 @@ import GoodActionBar from "./DetailGoodActionBar.vue";
 import loading from "../../utils/loading/loading";
 
 export default {
-  components: { Swiper, Tips, Info, Issue, Recommend, GoodActionBar },
+  components: { Swiper, Tips, Info, Sku, Issue, Recommend, GoodActionBar },
   setup() {
     const route = useRoute();
 

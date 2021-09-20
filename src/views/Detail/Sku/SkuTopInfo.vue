@@ -22,7 +22,7 @@
         <van-col
           span="18"
           class="data-msg"
-          v-text="'¥ ' + info.retail_price.toFixed(2) + ' 元'"
+          v-text="'¥ ' + Number(info.retail_price).toFixed(2) + ' 元'"
         />
       </van-row>
       <van-row>

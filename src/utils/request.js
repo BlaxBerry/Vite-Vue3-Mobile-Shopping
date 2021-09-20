@@ -8,6 +8,12 @@ const instance = axios.create({
 // Request Interceptors
 instance.interceptors.request.use(config => {
     // config.headers.token = "xxxx"
+    let user = localStorage.getItem('user')
+    if (user) {
+        // according to API 
+        config.headers['X-Nideshop-Token'] = JSON.parse(user).token
+    }
+
     return config;
 }, err => {
     return Promise.reject(err)

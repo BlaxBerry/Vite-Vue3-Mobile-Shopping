@@ -13,7 +13,7 @@ export default {
   setup(){
 
     GetAddress().then(res=>{
-      console.log(res);
+      // console.log(res);
     })
   }
 };

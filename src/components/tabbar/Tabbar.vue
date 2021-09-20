@@ -8,7 +8,7 @@
     <van-tabbar-item icon="home-o" to="/home">Home</van-tabbar-item>
     <van-tabbar-item icon="apps-o" to="/category">Category</van-tabbar-item>
     <van-tabbar-item icon="label-o" to="/topic">Topic</van-tabbar-item>
-    <van-tabbar-item icon="shopping-cart-o" badge="5" to="/cart"
+    <van-tabbar-item icon="shopping-cart-o" :badge="cartAmount" to="/cart"
       >Cart</van-tabbar-item
     >
     <van-tabbar-item icon="user-o" to="/user">My</van-tabbar-item>
@@ -16,12 +16,21 @@
 </template>
 
 <script>
-import { ref } from "@vue/reactivity";
+import { computed, ref } from "@vue/reactivity";
+import { useStore } from "vuex";
 
 export default {
   setup() {
+    const store = useStore();
+
+    // selected
     const active = ref(0);
-    return { active };
+
+    // cart amount
+    const cartAmount = computed(() => store.state.cart.cartAmount);
+    store.dispatch("getCartAmount");
+
+    return { active, cartAmount };
   },
 };
 </script>

@@ -126,6 +126,13 @@ SPA Mobile EC shopping web application.
 
 #### 4. Category
 
+4.1 category list 
+
+<img src="./public/images/category-01.png" style="zoom:50%;" />
+
+4.1 category detail
+
+<img src="./public/images/category-02.png" style="zoom:50%;" />
 ---
 
 #### 5. Cart
@@ -134,6 +141,13 @@ SPA Mobile EC shopping web application.
 
 <img src="./public/images/navagation-guard.png" style="zoom:50%;" />
 
+5.2 cart delete/edit/shop btns
+
+<img src="./public/images/cart-01.png" style="zoom:50%;" />
+
+5.3 cart edit amount
+
+<img src="./public/images/cart-02.png" style="zoom:50%;" />
 ---
 
 #### 6. User
@@ -141,3 +155,12 @@ SPA Mobile EC shopping web application.
 6.1 user login popup
 
 <img src="./public/images/user-login.png" style="zoom:50%;" />
+
+
+6.1 user info detail
+
+<img src="./public/images/user-info.png" style="zoom:50%;" />
+
+#### 7. topic
+
+<img src="./public/images/topic-01.png" style="zoom:50%;" />

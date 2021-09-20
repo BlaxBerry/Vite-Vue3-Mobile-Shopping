@@ -1,6 +1,8 @@
 import { createStore } from 'vuex'
 import Login from '../api/user/userLogin'
 import pic from '../assets/images/avatar.png'
+import getTabBarCartAmount from '../api/cart/getTabBarCartAmount'
+import addGoodToCart from '../api/cart/addGoodToCart'
 
 export default createStore({
     state: {
@@ -23,6 +25,17 @@ export default createStore({
             id: '',
             nickname: '请先登陆',
             username: ''
+        },
+
+        // Sku
+        sku: {
+            isSkuShow: false,
+            amount: 1
+        },
+
+        // cart
+        cart: {
+            cartAmount: 0
         }
     },
 
@@ -57,6 +70,26 @@ export default createStore({
             // 2. save the user info in localStorage
             let user = JSON.stringify(state.user)
             localStorage.setItem('user', user)
+        },
+
+        // show sku in detail
+        showSku(state) {
+            state.sku.isSkuShow = true
+        },
+        // close sku in detail
+        closeSku(state) {
+            state.sku.isSkuShow = false
+        },
+        // change Sku amount
+        changeSku(state, params) {
+            let { amount, goodsId } = params
+            state.sku.amount = amount
+            state.sku.goodsId = goodsId
+        },
+
+        // change Cart
+        changeCartAmount(state, params) {
+            state.cart.cartAmount = params
         }
     },
 
@@ -89,6 +122,26 @@ export default createStore({
                     context.commit('saveUserInfo', res.data)
                     context.commit("closeUserLoginPopup");
                 }
+            })
+        },
+        // get tabbar Cart number
+        getCartAmount(context) {
+            getTabBarCartAmount().then((res) => {
+                let cartAmount = res.data.cartTotal.goodsCount;
+                context.commit('changeCartAmount', cartAmount)
+            });
+        },
+        // add to cart
+        addToCart(context, params) {
+            let { goodsId, productId, number } = params
+            addGoodToCart({
+                goodsId,
+                productId,
+                number
+            }).then(res => {
+                // console.log(res.data);
+                let amount = res.data.cartTotal.goodsCount
+                context.commit('changeCartAmount', amount)
             })
         }
     },

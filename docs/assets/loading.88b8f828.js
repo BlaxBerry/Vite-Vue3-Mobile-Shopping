@@ -1,0 +1,1 @@
+import{ab as i}from"./vendor.ee1905bb.js";/* empty css              */function e(){i.loading({message:"Loading...",forbidClick:!0,loadingType:"spinner",iconSize:"1.5rem",duration:1e3})}export{e as l};

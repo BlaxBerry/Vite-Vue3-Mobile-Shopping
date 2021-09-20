@@ -10,18 +10,12 @@
     />
   </div>
 
-  <!-- 2. sku -->
-  <SkuBlock :info="info" :attribute="attribute"/>
-
 </template>
 
 <script>
-// components
-import SkuBlock from "./Sku/index.vue";
 
 export default {
   props: ["info", "attribute"],
-  components: { SkuBlock },
   setup(props) {},
 };
 </script>

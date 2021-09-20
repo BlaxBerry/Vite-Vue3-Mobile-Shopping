@@ -1,13 +1,14 @@
 <template>
-  <van-swipe-cell v-for="item in list" :key="item">
+  <van-swipe-cell v-for="item in list" :key="item.id">
     <van-card
-      num="2"
-      price="2.00"
-      desc="描述信息"
-      title="商品标题"
+      :num="item.number"
+      :price="' ' + Number(item.retail_price).toFixed(2) + ' 元'"
+      desc="暂无描述信息"
+      :title="item.goods_name"
       class="goods-card"
-      thumb="https://img.yzcdn.cn/vant/ipad.jpeg"
+      :thumb="item.list_pic_url"
     >
+      <!-- stepper -->
       <template #footer v-if="isShowStepper">
         <van-stepper
           v-model="stepperVal"
@@ -24,6 +25,7 @@
         />
       </template>
     </van-card>
+    <!-- right 3 btns -->
     <template #right>
       <van-button
         square
@@ -44,7 +46,7 @@
         icon="shop"
         type="primary"
         class="button"
-        :to="'/detail?id=' + 1009024"
+        :to="'/detail?id=' + item.goods_id"
       />
     </template>
   </van-swipe-cell>
@@ -54,7 +56,7 @@
 import { ref } from "@vue/reactivity";
 // utils
 import loading from "../../utils/loading/loading";
-import showDeleteDialog from "../../utils/cart/showDeleteDialog.js";
+import showDeleteDialog from "../../utils/cart/showDeleteDialog.js.js";
 
 export default {
   props: ["list"],
@@ -78,5 +80,3 @@ export default {
   },
 };
 </script>
-
-<style></style>

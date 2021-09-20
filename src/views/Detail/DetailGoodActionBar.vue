@@ -19,15 +19,24 @@
 </template>
 
 <script>
-import { useRouter } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
+import { useStore } from "vuex";
 // utils
 import handleGoodActionBar from "../../utils/detail/goodActionBar";
 
 export default {
-  setup() {
+  props: ["productList"],
+  setup(props) {
     const router = useRouter();
+    const route = useRoute();
+    const store = useStore();
 
-    let { goService, goShop, goCart, buyNow } = handleGoodActionBar(router);
+    let { goService, goShop, goCart, buyNow } = handleGoodActionBar(
+      router,
+      route,
+      store,
+      props
+    );
 
     return {
       icons: [

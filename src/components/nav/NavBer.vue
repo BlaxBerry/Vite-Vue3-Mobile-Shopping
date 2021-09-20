@@ -9,8 +9,8 @@ export default {
   setup() {
     const route = useRoute();
     const router = useRouter();
-    let name = route.meta.name;
 
+    let name = route.meta.name;
     const onClickLeft = () => router.go(-1);
 
     return { onClickLeft, name };

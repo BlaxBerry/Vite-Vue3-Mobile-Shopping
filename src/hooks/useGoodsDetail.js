@@ -35,6 +35,7 @@ export default function useGoodsDetail(id) {
     const getDetail = async () => {
         let detailResult = await GetGoodsDetail({ id })
         let detailData = detailResult.data
+        // console.log(detailData);
         if (detailResult.errno == 0) {
             goodsDetail.isShowDetail = true
             goodsDetail.gallery = detailData.gallery
