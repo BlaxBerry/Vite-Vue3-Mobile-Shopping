@@ -1,0 +1,1 @@
+import{_ as o}from"./NavBer.118e659f.js";import{b as e,d as r,o as s}from"./vendor.ee1905bb.js";const a={components:{Nav:o}};a.render=function(o,a,n,t,f,m){const c=e("Nav");return s(),r(c)};export{a as default};
