@@ -1,1 +1,0 @@
-import{_ as e}from"./NavBer.118e659f.js";import{i as s}from"./index.88486c6e.js";import{b as o,d as r,o as t}from"./vendor.ee1905bb.js";const a={components:{Nav:e},setup(){s({method:"GET",url:"/address/list"}).then((e=>{}))}};a.render=function(e,s,a,n,d,m){const i=o("Nav");return t(),r(i)};export{a as default};
