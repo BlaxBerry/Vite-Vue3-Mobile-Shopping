@@ -16,4 +16,5 @@ export default defineConfig({
       ],
     }),
   ],
+  base: '/Vite-Vue3-Mobile-Shopping/'
 })
