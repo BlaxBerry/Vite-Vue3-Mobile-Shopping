@@ -1,0 +1,1 @@
+import{_ as a}from"./NavBer.7ec7374c.js";import{_ as s}from"./Empty.2c0ab32f.js";import{b as o,g as r,e as t,a9 as m,F as n,o as e}from"./vendor.26f587a3.js";const c={components:{Nav:a,Empty:s}},p={class:"main-block"};c.render=function(a,s,c,f,i,l){const v=o("Nav"),d=o("Empty");return e(),r(n,null,[t(v),m("div",p,[t(d)])],64)};export{c as default};

@@ -1,0 +1,1 @@
+import{ab as i}from"./vendor.26f587a3.js";/* empty css              */function o(){i.loading({message:"Loading...",forbidClick:!0,loadingType:"spinner",iconSize:"1.5rem",duration:1e3})}export{o as l};

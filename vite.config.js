@@ -16,5 +16,14 @@ export default defineConfig({
       ],
     }),
   ],
-  base: ''
+  base: '',
+  server:{
+    proxy: {
+      '/api': {
+          target: 'http://kumanxuan1.f3322.net:8001/',
+          changeOrigin: true,
+          rewrite: path => path.replace(/^\/api/, '')
+      }
+  }
+  }
 })

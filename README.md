@@ -1,10 +1,9 @@
 ## Vite-Vue3-Mobile-Shopping
+
 SPA Mobile EC shopping web application.
 
-
-
-
 ### Tech Stacks
+
 - **Vite2**
 - **Vue3**
 - Vuex4
@@ -15,9 +14,11 @@ SPA Mobile EC shopping web application.
 - amfe-flexible
 - Axios
 
-
-
 ### Directory Detail
+
+<details>
+<summary><b>check</b></summary>
+
 ```js
 |- api
     |- home
@@ -40,7 +41,7 @@ SPA Mobile EC shopping web application.
 |- hooks
     |- useHomeListDetail.js
     |- usePopupKeywords.js
-    |- usePopupResult.js  
+    |- usePopupResult.js
     |- useGoodDetail.js
     |- useGrid.js
     ...
@@ -53,7 +54,7 @@ SPA Mobile EC shopping web application.
     |- loading
     |- navagation gard
     ...
-|- store 
+|- store
     |- index.js // vuex
 |- views
     |- Home
@@ -74,18 +75,37 @@ SPA Mobile EC shopping web application.
 ...
 ```
 
+</details>
 
+### Routes
+
+<details>
+<summary><b>1. Home</b></summary>
+</details>
+
+<details>
+<summary><b>2. Search</b></summary>
+</details>
+
+<details>
+<summary><b>3. Topic</b></summary>
+</details>
+
+<details>
+<summary><b>4. Cart</b></summary>
+</details>
+
+<details>
+<summary><b>5. My</b></summary>
+</details>
+
+<details>
+<summary><b>6. My</b></summary>
+</details>
 
 ### Images
 
 #### 1. Home
-1.1 home 
-
-<img src="./public/images/Home.png" style="zoom:50%;" />
-
-
-
-1.2 home
 
 <img src="./public/images/home-01.png" style="zoom:50%;" />
 
@@ -93,32 +113,17 @@ SPA Mobile EC shopping web application.
 
 #### 2. Search
 
-2.1 search history keywords
-
 <img src="./public/images/home-search.png" style="zoom:50%;" />
-
-
-
-2.2 search result list
 
 <img src="./public/images/home-search-list.png" style="zoom:50%;" />
 
 ---
 
 #### 3. Detail
-3.1 detail
 
 <img src="./public/images/detail-01.png" style="zoom:50%;" />
 
-
-
-3.2 detail
-
 <img src="./public/images/detail-02.png" style="zoom:50%;" />
-
-
-
-3.3 detail popup sku 
 
 <img src="./public/images/detail-sku.png" style="zoom:50%;" />
 
@@ -126,40 +131,29 @@ SPA Mobile EC shopping web application.
 
 #### 4. Category
 
-4.1 category list 
-
 <img src="./public/images/category-01.png" style="zoom:50%;" />
 
-4.1 category detail
-
 <img src="./public/images/category-02.png" style="zoom:50%;" />
+
 ---
 
 #### 5. Cart
 
-5.1 cart route navagation guard
-
 <img src="./public/images/navagation-guard.png" style="zoom:50%;" />
-
-5.2 cart delete/edit/shop btns
 
 <img src="./public/images/cart-01.png" style="zoom:50%;" />
 
-5.3 cart edit amount
+## <img src="./public/images/cart-02.png" style="zoom:50%;" />
 
-<img src="./public/images/cart-02.png" style="zoom:50%;" />
 ---
 
 #### 6. User
 
-6.1 user login popup
-
 <img src="./public/images/user-login.png" style="zoom:50%;" />
 
-
-6.1 user info detail
-
 <img src="./public/images/user-info.png" style="zoom:50%;" />
+
+---
 
 #### 7. topic
 

@@ -1,0 +1,1 @@
+import{b as o,d as r,o as n}from"./vendor.26f587a3.js";const e={};e.render=function(e,s,t,a,i,c){const d=o("van-empty");return n(),r(d,{image:"search",description:"Sorry~ Found Nothing~"})};export{e as _};

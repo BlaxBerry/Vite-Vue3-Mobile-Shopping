@@ -1,0 +1,1 @@
+import{ad as a,a6 as e,b as t,d as n,o}from"./vendor.26f587a3.js";const r={setup(){const t=a(),n=e();return{onClickLeft:()=>n.go(-1),name:t.meta.name}}};r.render=function(a,e,r,s,c,f){const i=t("van-nav-bar");return o(),n(i,{fixed:"",title:s.name,"left-arrow":"",onClickLeft:s.onClickLeft},null,8,["title","onClickLeft"])},r.__scopeId="data-v-679c54ab";export{r as _};

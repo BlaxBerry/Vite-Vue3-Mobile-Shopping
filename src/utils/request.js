@@ -1,7 +1,8 @@
 import axios from 'axios'
 
 const instance = axios.create({
-    baseURL: 'http://kumanxuan1.f3322.net:8001',
+    // baseURL: 'http://kumanxuan1.f3322.net:8001',
+    baseURL: "/api",
     timeout: 5000
 })
 
