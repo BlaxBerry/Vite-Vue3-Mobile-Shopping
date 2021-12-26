@@ -4,15 +4,15 @@ SPA Mobile EC shopping web application.
 
 ### Tech Stacks
 
-- **Vite2**
-- **Vue3**
-- Vuex4
-- Vue-Router4
-- **Vant3** ( UI Components )
-- Less
-- postcss
-- amfe-flexible
-- Axios
+- [Vite2]()
+- [Vue3]()
+- [Vuex4]()
+- [Vue-Router4]()
+- [Vant3]()
+- [Less]()
+- [postcss]()
+- [amfe-flexible]()
+- [Axios]()
 
 ### Directory Detail
 
@@ -107,54 +107,54 @@ SPA Mobile EC shopping web application.
 
 #### 1. Home
 
-<img src="./public/images/home-01.png" style="zoom:50%;" />
+<img src="./public/images/home-01.png" />
 
 ---
 
 #### 2. Search
 
-<img src="./public/images/home-search.png" style="zoom:50%;" />
+<img src="./public/images/home-search.png"" />
 
-<img src="./public/images/home-search-list.png" style="zoom:50%;" />
+<img src="./public/images/home-search-list.png"" />
 
 ---
 
 #### 3. Detail
 
-<img src="./public/images/detail-01.png" style="zoom:50%;" />
+<img src="./public/images/detail-01.png" />
 
-<img src="./public/images/detail-02.png" style="zoom:50%;" />
+<img src="./public/images/detail-02.png" />
 
-<img src="./public/images/detail-sku.png" style="zoom:50%;" />
+<img src="./public/images/detail-sku.png" />
 
 ---
 
 #### 4. Category
 
-<img src="./public/images/category-01.png" style="zoom:50%;" />
+<img src="./public/images/category-01.png" />
 
-<img src="./public/images/category-02.png" style="zoom:50%;" />
+<img src="./public/images/category-02.png" />
 
 ---
 
 #### 5. Cart
 
-<img src="./public/images/navagation-guard.png" style="zoom:50%;" />
+<img src="./public/images/navagation-guard.png"/>
 
-<img src="./public/images/cart-01.png" style="zoom:50%;" />
+<img src="./public/images/cart-01.png"/>
 
-## <img src="./public/images/cart-02.png" style="zoom:50%;" />
+<img src="./public/images/cart-02.png"/>
 
 ---
 
 #### 6. User
 
-<img src="./public/images/user-login.png" style="zoom:50%;" />
+<img src="./public/images/user-login.png" />
 
-<img src="./public/images/user-info.png" style="zoom:50%;" />
+<img src="./public/images/user-info.png" />
 
 ---
 
 #### 7. topic
 
-<img src="./public/images/topic-01.png" style="zoom:50%;" />
+<img src="./public/images/topic-01.png" />
